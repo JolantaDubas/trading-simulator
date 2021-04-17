@@ -1,0 +1,43 @@
+<div *ngIf="!loading" class="container">
+  <div class="title">
+    <img [src]="details?.image?.small" />
+    <h1>{{ details.name + " (" + details.symbol + ")" }}</h1>
+  </div>
+  <div class="main" style="display: flex">
+    <h1>
+      {{
+        details.market_data.current_price[currValue] | currency: currValueUpper
+      }}
+    </h1>
+    <h2 style="width: 12px"></h2>
+    <h2
+      [ngStyle]="{
+        color:
+          details.market_data.price_change_24h_in_currency[currValue] <= 0
+            ? 'red'
+            : 'green'
+      }"
+    >
+      <span
+        *ngIf="details.market_data.price_change_24h_in_currency[currValue] > 0"
+        >+</span
+      >
+    </h2>
+    <h2
+      [ngStyle]="{
+        color:
+          details.market_data.price_change_24h_in_currency[currValue] <= 0
+            ? 'red'
+            : 'green'
+      }"
+    >
+      {{ details.market_data.price_change_24h_in_currency[currValue] }} (
+      {{
+        details.market_data.price_change_percentage_24h_in_currency[currValue]
+      }}% )
+    </h2>
+  </div>
+  <div class="descr">
+    <p [innerHTML]="details?.description?.pl"></p>
+  </div>
+</div>

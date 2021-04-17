@@ -1,0 +1,16 @@
+.btn {
+  @apply px-4 py-3 w-36 my-3 text-2xl rounded-lg;
+  // padding: 12px 24px;
+  // width: fit-content;
+  // color: #031329;
+  // font-size: 1.8rem;
+  // font-weight: 600;
+  // background: none;
+  // border: 3px solid #6962ff;
+  // border-radius: 10px;
+  // margin: 0 10px;;
+}
+
+.mainBtn {
+  @apply bg-pink-900 ;
+}

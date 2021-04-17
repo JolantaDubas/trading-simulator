@@ -1,0 +1,45 @@
+<div>
+  <div class="block">
+    <h1>Trending</h1>
+    <div class="trending">
+      <div
+        [routerLink]="['/coin', item.item.id]"
+        class="item"
+        *ngFor="let item of trending.coins"
+      >
+        <img [src]="item.item.thumb" />
+        <h4>{{ item.item.symbol }}</h4>
+      </div>
+    </div>
+  </div>
+  <div class="block">
+    <h1>Top 100</h1>
+    <table class="table">
+      <tr>
+        <th>Coin</th>
+        <th>Last</th>
+        <th>1 h</th>
+        <th>24 h</th>
+        <th>7 d</th>
+        <th>30 d</th>
+        <th>1 y</th>
+        <th>ATH</th>
+        <th>MKT CAP</th>
+      </tr>
+      <tr [routerLink]="['/coin', item.id]" *ngFor="let item of market">
+        <td class="flex">
+          <img style="height: 20px" [src]="item.image" />
+          {{ item.name + " (" + item.symbol + ")" }}
+        </td>
+        <td>{{ item.current_price }}</td>
+        <td>{{ item.price_change_percentage_1h_in_currency | number }}</td>
+        <td>{{ item.price_change_percentage_24h_in_currency | number }}</td>
+        <td>{{ item.price_change_percentage_7d_in_currency | number }}</td>
+        <td>{{ item.price_change_percentage_30d_in_currency | number }}</td>
+        <td>{{ item.price_change_percentage_1y_in_currency | number }}</td>
+        <td>{{ item.price_change_percentage_1y_in_currency | number }}</td>
+        <td>{{ item.price_change_percentage_1y_in_currency | number }}</td>
+      </tr>
+    </table>
+  </div>
+</div>

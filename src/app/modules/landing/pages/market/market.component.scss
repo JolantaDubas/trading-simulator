@@ -1,0 +1,37 @@
+:host {
+  width: 100%;
+}
+
+.block {
+  @apply w-full grid justify-items-center p-6;
+}
+
+h1 {
+  @apply mb-5;
+}
+
+.trending {
+  @apply flex p-4 rounded-lg;
+}
+
+.item {
+  @apply flex mx-3;
+}
+
+img {
+  @apply mr-2 h-5;
+}
+
+.table {
+  @apply w-full;
+}
+
+td {
+  @apply self-end;
+}
+
+tr:hover {
+  td {
+    @apply text-primary;
+  }
+}

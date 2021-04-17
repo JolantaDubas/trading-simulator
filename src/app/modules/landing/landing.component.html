@@ -1,0 +1,67 @@
+<div class="relative">
+  <div class="absolute h-96 bg-primary w-full"></div>
+  <div class="p-14 w-full grid gap-6">
+    <div class="z-10 h-16 flex justify-between">
+      <h3 class="text-white">Dashboard</h3>
+      <h3 lass="text-white">Search</h3>
+    </div>
+    <div class="z-10 grid grid-cols-4 gap-6 h-20">
+      <app-box>Waluty</app-box>
+      <app-box>Giełdy</app-box>
+      <app-box>Kapitalizacja rynkowa</app-box>
+      <app-box>Dominacja</app-box>
+    </div>
+    <app-box class="z-10"
+      >Wykres
+      <div class="h-96"></div
+    ></app-box>
+    <div class="flex justify-between">
+      <app-box class="z-10 w-9/12"
+        >Market
+        <div class="pt-8">
+          <table class="table py-3 justify-items-start">
+            <tr class="bg-gray-700 text-lg font-normal text-white">
+              <th>Coin</th>
+              <th>Last</th>
+              <th>24 h</th>
+            </tr>
+            <tr
+              [routerLink]="['/coin', item.id]"
+              *ngFor="let item of market"
+              class="border-gray-100 border-2"
+            >
+              <td class="flex h-full">
+                <img class="h-5 mr-2" [src]="item.image" />
+                {{ item.name + " (" + item.symbol + ")" }}
+              </td>
+              <td>{{ item.current_price }}</td>
+              <td>
+                {{ item.price_change_percentage_24h_in_currency | number }}
+              </td>
+            </tr>
+          </table>
+        </div></app-box
+      >
+      <app-box class="z-10 w-1/5"
+        >Trending
+        <div class="pt-8">
+          <table class="table py-3 justify-items-start">
+            <tr class="bg-gray-700 text-lg font-normal text-white">
+              <th>Coin</th>
+            </tr>
+            <tr
+              [routerLink]="['/coin', item.id]"
+              *ngFor="let item of trending.coins"
+              class="border-gray-100 border-2"
+            >
+              <td class="flex h-full">
+                <img class="h-5 mr-2" [src]="item.item.thumb" />
+                {{ item.item.name + " (" + item.item.symbol + ")" }}
+              </td>
+            </tr>
+          </table>
+        </div></app-box
+      >
+    </div>
+  </div>
+</div>

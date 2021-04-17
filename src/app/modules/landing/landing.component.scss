@@ -1,0 +1,21 @@
+:host {
+  width: 100%;
+}
+
+.table {
+  @apply w-full;
+}
+
+th {
+  @apply p-3;
+}
+
+td {
+  @apply py-2 px-3;
+}
+
+tr:hover {
+  td {
+    @apply text-black bg-gray-100 border-gray-200;
+  }
+}
