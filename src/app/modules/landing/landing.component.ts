@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CoinGeckoService } from 'src/app/core/services/coin-gecko.service';
+import { NomicsService } from 'src/app/core/services/nomics.service';
 
 @Component({
   selector: 'app-landing',
@@ -10,8 +11,11 @@ export class LandingComponent implements OnInit {
   global: any;
   market: any;
   trending: { coins: any[]; exchanges: any[] };
-
-  constructor(private coinGeckoService: CoinGeckoService) {}
+  currencies: any;
+  constructor(
+    private coinGeckoService: CoinGeckoService,
+    private nomicsService: NomicsService
+  ) {}
 
   ngOnInit(): void {
     this.coinGeckoService.getGlobal().subscribe(
@@ -23,14 +27,23 @@ export class LandingComponent implements OnInit {
       (err) => console.log(err)
     );
 
-    this.coinGeckoService.getMarketData('usd').subscribe(
-      (res: { coins: any[]; exchanges: any[] }) => {
+    this.nomicsService.getCurrenciesTicker().subscribe(
+      (res) => {
         console.log(res);
-        this.market = res;
-        console.log(this.market);
+        this.currencies = res;
+        console.log('currencies', this.currencies);
       },
       (err) => console.log(err)
     );
+
+    // this.coinGeckoService.getMarketData({}).subscribe(
+    //   (res: { coins: any[]; exchanges: any[] }) => {
+    //     console.log(res);
+    //     this.market = res;
+    //     console.log('market', this.market);
+    //   },
+    //   (err) => console.log(err)
+    // );
 
     this.coinGeckoService.getTrending().subscribe(
       (res: { coins: any[]; exchanges: any[] }) => {

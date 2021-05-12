@@ -1,25 +1,62 @@
 <div class="relative">
-  <div class="absolute h-96 bg-primary w-full"></div>
+  <div class="absolute h-96 bg-primary-blue w-full"></div>
   <div class="p-14 w-full grid gap-6">
     <div class="z-10 h-16 flex justify-between">
       <h3 class="text-white">Dashboard</h3>
       <h3 lass="text-white">Search</h3>
     </div>
     <div class="z-10 grid grid-cols-4 gap-6 h-20">
-      <app-box>Waluty</app-box>
-      <app-box>Giełdy</app-box>
-      <app-box>Kapitalizacja rynkowa</app-box>
-      <app-box>Dominacja</app-box>
+      <app-box title="Active cryptocurrencies">
+        <p>
+          <a [routerLink]="['/market']">{{
+            global?.data?.active_cryptocurrencies
+          }}</a>
+        </p></app-box
+      >
+      <app-box title="Giełdy"></app-box>
+      <app-box title="Market cap change">
+        <p>{{ global?.data?.market_cap_change_percentage_24h_usd }}</p></app-box
+      >
+      <app-box title="Dominance">
+        <p>
+          <a [routerLink]="['/coin/bitcoin']">
+            BTC:
+            {{ global?.data?.market_cap_percentage?.btc.toFixed(2) }}% </a
+          >,
+          <a [routerLink]="['/coin/ethereum']"
+            >ETH: {{ global?.data?.market_cap_percentage?.eth.toFixed(2) }}%</a
+          >
+        </p></app-box
+      >
     </div>
-    <app-box class="z-10"
-      >Wykres
-      <div class="h-96"></div
-    ></app-box>
+    <app-box class="z-10" title="Wykres"> <div class="h-96"></div></app-box>
     <div class="flex justify-between">
-      <app-box class="z-10 w-9/12"
-        >Market
+      <app-box title="Market" showBtn="true" link="/market" class="z-10 w-9/12">
         <div class="pt-8">
-          <table class="table py-3 justify-items-start">
+          <table>
+            <div header>
+              <th>Coin</th>
+              <th>Last</th>
+              <th>24 h</th>
+            </div>
+            <div body>
+              <tr
+                [routerLink]="['/coin', item.id]"
+                *ngFor="let item of market"
+                class="border-gray-100 border-2"
+              >
+                <td class="flex h-full">
+                  <img class="h-5 mr-2" [src]="item.image" />
+                  {{ item.name + " (" + item.symbol + ")" }}
+                </td>
+                <td>{{ item.current_price }}</td>
+                <td>
+                  {{ item.price_change_percentage_24h_in_currency | number }}
+                </td>
+              </tr>
+            </div>
+          </table>
+          <!-- <table class="table py-3 justify-items-start">
             <tr class="bg-gray-700 text-lg font-normal text-white">
               <th>Coin</th>
               <th>Last</th>
@@ -39,18 +76,17 @@
                 {{ item.price_change_percentage_24h_in_currency | number }}
               </td>
             </tr>
-          </table>
+          </table> -->
         </div></app-box
       >
-      <app-box class="z-10 w-1/5"
-        >Trending
+      <app-box class="z-10 w-1/5" title="Trending">
         <div class="pt-8">
           <table class="table py-3 justify-items-start">
             <tr class="bg-gray-700 text-lg font-normal text-white">
               <th>Coin</th>
             </tr>
             <tr
-              [routerLink]="['/coin', item.id]"
+              [routerLink]="['/coin', item.item.id]"
               *ngFor="let item of trending.coins"
               class="border-gray-100 border-2"
             >

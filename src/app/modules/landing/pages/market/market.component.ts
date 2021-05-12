@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { CoinGeckoService } from 'src/app/core/services/coin-gecko.service';
 
 @Component({
@@ -9,25 +9,112 @@ import { CoinGeckoService } from 'src/app/core/services/coin-gecko.service';
 export class MarketComponent implements OnInit {
   trending: { coins: any[]; exchanges: any[] };
   market: any;
+  resultsLength: number;
+  dtOptions: DataTables.Settings = {};
+
   constructor(private coinGeckoService: CoinGeckoService) {}
 
+  checkPrice(value: number): any {
+    let color: string;
+    if (value > 0) return (color = 'green');
+    else return (color = 'red');
+  }
   ngOnInit(): void {
-    this.coinGeckoService.getTrending().subscribe(
-      (res: { coins: any[]; exchanges: any[] }) => {
-        console.log(res);
-        this.trending = res;
-        console.log(this.trending.coins);
-      },
-      (err) => console.log(err)
-    );
+    this.dtOptions = {
+      ajax: (dataTablesParameters: any, callback) => {
+        // that.http
+        //   .post<DataTablesResponse>(
+        //     'https://angular-datatables-demo-server.herokuapp.com/',
+        //     dataTablesParameters, {}
+        //   ).subscribe(resp => {
+        //     that.persons = resp.data;
 
-    this.coinGeckoService.getMarketData('usd').subscribe(
-      (res: { coins: any[]; exchanges: any[] }) => {
-        console.log(res);
-        this.market = res;
-        console.log(this.market);
+        //     callback({
+        //       recordsTotal: resp.recordsTotal,
+        //       recordsFiltered: resp.recordsFiltered,
+        //       data: []
+        //     });
+        //   });
+        console.log('dataTablesParameters', dataTablesParameters);
+        this.coinGeckoService.getMarketData(dataTablesParameters, {}).subscribe(
+          (res: { coins: any[]; exchanges: any[] }) => {
+            console.log(res);
+            this.market = res;
+            this.resultsLength = this.market.length;
+            console.log('market', this.market);
+
+            callback({
+              recordsTotal: 200,
+              recordsFiltered: 200,
+              lengthChange: true,
+              data: res,
+            });
+          },
+          (err) => console.log(err)
+        );
       },
-      (err) => console.log(err)
-    );
+      columns: [
+        {
+          title: 'Coin',
+          data: 'name',
+          searchable: false,
+          render: function (name, type, data) {
+            console.log('name');
+            return (
+              '<div class="flex items-center"><img class="h-5 w-5 mr-4" src="' +
+              data.image +
+              '"/>' +
+              name +
+              ' (' +
+              data.symbol +
+              ')</div>'
+            );
+          },
+        },
+        {
+          title: 'Last',
+          data: 'current_price',
+          searchable: false,
+          orderable: false,
+        },
+        {
+          title: '24h',
+          data: 'price_change_percentage_24h',
+          searchable: false,
+          orderable: false,
+
+          // render: function (price_change_percentage_24h) {
+          //   return (
+          //     '<app-price-change valueChange="' +
+          //     price_change_percentage_24h +
+          //     '"></app-price-change>'
+          //   );
+          // },
+        },
+        // {
+        //   title: '24h',
+        //   data: '24H',
+        // },
+        {
+          title: 'MKT CAP',
+          data: 'market_cap',
+          searchable: false,
+        },
+        {
+          title: 'ATH',
+          data: 'ath',
+          searchable: false,
+        },
+      ],
+      pagingType: 'full_numbers',
+      pageLength: 25,
+      serverSide: true,
+      processing: true,
+      searching: false,
+      ordering: true,
+      orderCellsTop: true,
+      orderClasses: true,
+      scrollY: 'calc(100vh - 230px)',
+    };
   }
 }

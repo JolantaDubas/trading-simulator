@@ -1,45 +1,60 @@
-<div>
-  <div class="block">
-    <h1>Trending</h1>
-    <div class="trending">
-      <div
-        [routerLink]="['/coin', item.item.id]"
-        class="item"
-        *ngFor="let item of trending.coins"
+<div class="my-6 mx-8">
+  <app-box>
+    <div class="w-full">
+      <table
+        datatable
+        [dtOptions]="dtOptions"
+        class="stripe row-border order-column hover w-full"
       >
-        <img [src]="item.item.thumb" />
-        <h4>{{ item.item.symbol }}</h4>
-      </div>
+        <!-- <thead class="w-full">
+          <tr>
+            <th>Coin</th>
+            <th>Last</th>
+            <th>1 h</th>
+            <th>24 h</th>
+            <th>7 d</th>
+            <th>30 d</th>
+            <th>1 y</th>
+            <th>ATH</th>
+            <th>MKT CAP</th>
+          </tr>
+        </thead>
+        <tbody *ngIf="market?.items?.length != 0">
+          <tr [routerLink]="['/coin', item.id]" *ngFor="let item of market">
+            <td class="flex">
+              <img style="height: 20px" [src]="item.image" />
+              {{ item.name + " (" + item.symbol + ")" }}
+            </td>
+            <td>{{ item.current_price }}</td>
+            <td>{{ item.price_change_percentage_1h_in_currency | number }}</td>
+            <td>{{ item.price_change_percentage_24h_in_currency | number }}</td>
+            <td>{{ item.price_change_percentage_7d_in_currency | number }}</td>
+            <td>{{ item.price_change_percentage_30d_in_currency | number }}</td>
+            <td>{{ item.price_change_percentage_1y_in_currency | number }}</td>
+            <td>{{ item.price_change_percentage_1y_in_currency | number }}</td>
+            <td>{{ item.price_change_percentage_1y_in_currency | number }}</td>
+          </tr>
+        </tbody> -->
+      </table>
+      <!-- <table mat-table class="w-full" [dataSource]="market" matSort>
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Coin</th>
+          <td mat-cell *matCellDef="let item">
+            <div class="flex">
+              <img style="height: 20px" [src]="item.image" />{{ item.name }}
+            </div>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="market_cap">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>market_cap</th>
+          <td mat-cell *matCellDef="let item">{{ item.market_cap }}</td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table> -->
     </div>
-  </div>
-  <div class="block">
-    <h1>Top 100</h1>
-    <table class="table">
-      <tr>
-        <th>Coin</th>
-        <th>Last</th>
-        <th>1 h</th>
-        <th>24 h</th>
-        <th>7 d</th>
-        <th>30 d</th>
-        <th>1 y</th>
-        <th>ATH</th>
-        <th>MKT CAP</th>
-      </tr>
-      <tr [routerLink]="['/coin', item.id]" *ngFor="let item of market">
-        <td class="flex">
-          <img style="height: 20px" [src]="item.image" />
-          {{ item.name + " (" + item.symbol + ")" }}
-        </td>
-        <td>{{ item.current_price }}</td>
-        <td>{{ item.price_change_percentage_1h_in_currency | number }}</td>
-        <td>{{ item.price_change_percentage_24h_in_currency | number }}</td>
-        <td>{{ item.price_change_percentage_7d_in_currency | number }}</td>
-        <td>{{ item.price_change_percentage_30d_in_currency | number }}</td>
-        <td>{{ item.price_change_percentage_1y_in_currency | number }}</td>
-        <td>{{ item.price_change_percentage_1y_in_currency | number }}</td>
-        <td>{{ item.price_change_percentage_1y_in_currency | number }}</td>
-      </tr>
-    </table>
-  </div>
+    <!-- <mat-paginator [pageSizeOptions]="20"></mat-paginator> -->
+  </app-box>
 </div>

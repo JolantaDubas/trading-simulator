@@ -30,13 +30,19 @@ export class CoinGeckoService {
   getCoinData(id: string) {
     return this.http.get('https://api.coingecko.com/api/v3/coins/' + id);
   }
-  getMarketData(curr: string) {
+  getMarketData(
+    params,
+    { curr = 'usd', order = 'name', per_page = '20', page = '1' }
+  ) {
     return this.http.get('https://api.coingecko.com/api/v3/coins/markets/', {
       params: {
         vs_currency: curr,
-        order: 'market_cap_desc',
-        per_page: '10',
-        page: '1',
+        order:
+          params.columns[params.order[0]?.column].data +
+            '_' +
+            params.order[0].dir || order,
+        per_page: params.length || per_page,
+        page: params.draw || page,
         sparkline: 'false',
         price_change_percentage: '1h,24h,7d,30d,1y',
       },

@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class NavigationComponent implements OnInit {
   sharedLinks = [
     { title: 'DASHBOARD', path: '', icon: 'fas fa-home' },
-    { title: 'MARKET', path: 'market', icon: 'fas fa-coins' },
+    { title: 'MARKET', path: '/market', icon: 'fas fa-coins' },
   ];
   loginUser = [
     { title: 'MY ACCOUNT', path: '/my_account', icon: 'fas fa-key' },

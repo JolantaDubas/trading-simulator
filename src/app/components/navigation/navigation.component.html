@@ -1,14 +1,14 @@
-<div class="w-full h-full bg-white shadow-xl py-9 px-8">
+<div class="w-56 h-full bg-white shadow-xl py-9 px-8">
   <div class="fixed grid gap-6">
     <div *ngFor="let link of sharedLinks">
-      <a [routerLink]="link.path">
-        <i class="text-gray-500 mr-3" class="{{ link.icon }}"></i>
+      <a class="text-gray-500" [routerLink]="link.path">
+        <i class="mr-3" class="{{ link.icon }}"></i>
         {{ link.title }}
       </a>
     </div>
     <div *ngFor="let link of logoutUser" routerLinkActive="router-link-active">
-      <a [routerLink]="link.path">
-        <i class="text-gray-500 mr-3" class="{{ link.icon }}"></i>
+      <a class="text-gray-500" [routerLink]="link.path">
+        <i class="mr-3" class="{{ link.icon }}"></i>
         {{ link.title }}
       </a>
     </div>

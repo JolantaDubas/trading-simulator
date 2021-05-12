@@ -1,5 +1,5 @@
 .btn {
-  @apply px-4 py-3 w-36 my-3 text-2xl rounded-lg;
+  @apply px-4 py-3 w-36  text-base rounded-lg flex justify-center;
   // padding: 12px 24px;
   // width: fit-content;
   // color: #031329;
@@ -12,5 +12,5 @@
 }
 
 .mainBtn {
-  @apply bg-pink-900 ;
+  @apply bg-primary text-white opacity-80 hover:opacity-100;
 }

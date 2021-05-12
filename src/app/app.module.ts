@@ -9,6 +9,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { BottomHeaderComponent } from './components/bottom-header/bottom-header.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { SharedModule } from './shared/shared.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,13 @@ import { SharedModule } from './shared/shared.module';
     BottomHeaderComponent,
     NavigationComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule, SharedModule],
+  imports: [
+    BrowserModule,
+    BrowserAnimationsModule,
+    AppRoutingModule,
+    HttpClientModule,
+    SharedModule,
+  ],
   providers: [HttpClientModule],
   bootstrap: [AppComponent],
 })

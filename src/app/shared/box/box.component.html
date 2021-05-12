@@ -1,5 +1,11 @@
 <div class="w-full h-full rounded shadow-md bg-white">
   <div class="p-6">
+    <div class="flex justify-between items-center">
+      <div *ngIf="title">
+        <i *ngIf="icon" class="{{ icon }}"></i>{{ title }}:
+      </div>
+      <a *ngIf="link" [routerLink]="link" class="btn mainBtn"> See more </a>
+    </div>
     <ng-content class="m-4"></ng-content>
   </div>
 </div>
