@@ -11,7 +11,7 @@ import { Router, ParamMap } from '@angular/router';
 export class CoinDetailsComponent implements OnInit {
   id: string;
   details: any;
-  currValue = 'eur';
+  currValue = localStorage.getItem('vs_currency').toLowerCase();
   currValueUpper: string;
   loading = true;
   constructor(

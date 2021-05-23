@@ -11,9 +11,19 @@ import { MatInputModule } from '@angular/material/input';
 import { RouterModule } from '@angular/router';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { DataTablesModule } from 'angular-datatables';
+import { NgApexchartsModule } from 'ng-apexcharts';
+import { SearchComponent } from './search/search.component';
+import { SelectComponent } from './select/select.component';
+import { MatSelectModule } from '@angular/material/select';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 @NgModule({
-  declarations: [BoxComponent, PriceChangeComponent],
+  declarations: [
+    BoxComponent,
+    PriceChangeComponent,
+    SearchComponent,
+    SelectComponent,
+  ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
@@ -23,6 +33,9 @@ import { DataTablesModule } from 'angular-datatables';
     DataTablesModule,
     RouterModule,
     MatFormFieldModule,
+    NgApexchartsModule,
+    MatSelectModule,
+    MatAutocompleteModule,
   ],
   exports: [
     BoxComponent,
@@ -33,6 +46,10 @@ import { DataTablesModule } from 'angular-datatables';
     DataTablesModule,
     MatFormFieldModule,
     PriceChangeComponent,
+    NgApexchartsModule,
+    MatSelectModule,
+    SelectComponent,
+    MatAutocompleteModule,
   ],
 })
 export class SharedModule {}

@@ -18,6 +18,8 @@ export class LandingComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    // localStorage.setItem('vs_currency', 'USD');
+
     this.coinGeckoService.getGlobal().subscribe(
       (res: { coins: any[]; exchanges: any[] }) => {
         console.log(res);

@@ -6,6 +6,7 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class PriceChangeComponent implements OnInit {
   @Input() valueChange: number;
+  @Input() percentChange: number;
   constructor() {}
 
   ngOnInit(): void {

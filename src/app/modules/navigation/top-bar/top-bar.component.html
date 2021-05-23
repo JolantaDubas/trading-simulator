@@ -1,0 +1,17 @@
+<div class="bg-primary-blue w-full h-20 flex justify-between px-8 items-center">
+  <div *ngIf="coins">
+    <app-select
+      class="justify-self-start w-96"
+      placeholder="search"
+      [options]="coins"
+      [control]="coinControl"
+    ></app-select>
+  </div>
+
+  <app-select
+    *ngIf="vsCurrencies"
+    class="justify-self-end w-24"
+    [options]="vsCurrencies"
+    [control]="vsCurrencyControl"
+  ></app-select>
+</div>

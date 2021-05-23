@@ -3,8 +3,10 @@
   <app-bottom-header></app-bottom-header> -->
 
   <div class="bg-gray-100 min-h-screen h-auto flex">
-    <app-navigation></app-navigation>
-    <router-outlet></router-outlet>
+    <app-side-navbar></app-side-navbar>
+    <div class="grid w-full">
+      <app-top-bar></app-top-bar>
+      <router-outlet></router-outlet>
+    </div>
   </div>
-  <app-footer></app-footer>
 </body>

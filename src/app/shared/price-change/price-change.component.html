@@ -6,5 +6,6 @@
   <i [ngClass]="valueChange <= 0 ? 'fas fa-arrow-down' : 'fas fa-arrow-down'">
   </i>
   <!-- {{ details.market_data.price_change_24h_in_currency[currValue] }} ( -->
-  {{ valueChange }}%
+  <p *ngIf="valueChange">{{ valueChange }}</p>
+  {{ percentChange }}%
 </h4>

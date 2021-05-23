@@ -1,4 +1,6 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Renderer2 } from '@angular/core';
+import { Router } from '@angular/router';
+import { Subject } from 'rxjs';
 import { CoinGeckoService } from 'src/app/core/services/coin-gecko.service';
 
 @Component({
@@ -11,6 +13,8 @@ export class MarketComponent implements OnInit {
   market: any;
   resultsLength: number;
   dtOptions: DataTables.Settings = {};
+
+  dtTrigger: Subject<any> = new Subject<any>();
 
   constructor(private coinGeckoService: CoinGeckoService) {}
 
@@ -44,68 +48,76 @@ export class MarketComponent implements OnInit {
             console.log('market', this.market);
 
             callback({
-              recordsTotal: 200,
-              recordsFiltered: 200,
+              recordsTotal: 7459,
+              recordsFiltered: 7459,
               lengthChange: true,
-              data: res,
+              data: [],
+              //   data: res,
             });
           },
           (err) => console.log(err)
         );
       },
       columns: [
-        {
-          title: 'Coin',
-          data: 'name',
-          searchable: false,
-          render: function (name, type, data) {
-            console.log('name');
-            return (
-              '<div class="flex items-center"><img class="h-5 w-5 mr-4" src="' +
-              data.image +
-              '"/>' +
-              name +
-              ' (' +
-              data.symbol +
-              ')</div>'
-            );
-          },
-        },
-        {
-          title: 'Last',
-          data: 'current_price',
-          searchable: false,
-          orderable: false,
-        },
-        {
-          title: '24h',
-          data: 'price_change_percentage_24h',
-          searchable: false,
-          orderable: false,
-
-          // render: function (price_change_percentage_24h) {
-          //   return (
-          //     '<app-price-change valueChange="' +
-          //     price_change_percentage_24h +
-          //     '"></app-price-change>'
-          //   );
-          // },
-        },
-        // {
-        //   title: '24h',
-        //   data: '24H',
-        // },
-        {
-          title: 'MKT CAP',
-          data: 'market_cap',
-          searchable: false,
-        },
-        {
-          title: 'ATH',
-          data: 'ath',
-          searchable: false,
-        },
+        { data: 'name' },
+        { data: 'current_price' },
+        { data: 'price_change_percentage_24h_in_currency' },
+        { data: 'market_cap' },
+        { data: 'ath' },
       ],
+      // columns: [
+      //   {
+      //     title: 'Coin',
+      //     data: 'name',
+      //     searchable: false,
+      //     render: function (name, type, data) {
+      //       console.log('name');
+      //       return (
+      //         '<div  class="flex items-center"><img class="h-5 w-5 mr-4" src="' +
+      //         data.image +
+      //         '"/>' +
+      //         name +
+      //         ' (' +
+      //         data.symbol +
+      //         ')</div>'
+      //       );
+      //     },
+      //   },
+      //   {
+      //     title: 'Last',
+      //     data: 'current_price',
+      //     searchable: false,
+      //     orderable: false,
+      //   },
+      //   {
+      //     title: '24h',
+      //     data: 'price_change_percentage_24h',
+      //     searchable: false,
+      //     orderable: false,
+
+      //     // render: function (price_change_percentage_24h) {
+      //     //   return (
+      //     //     '<app-price-change valueChange="' +
+      //     //     price_change_percentage_24h +
+      //     //     '"></app-price-change>'
+      //     //   );
+      //     // },
+      //   },
+      //   // {
+      //   //   title: '24h',
+      //   //   data: '24H',
+      //   // },
+      //   {
+      //     title: 'MKT CAP',
+      //     data: 'market_cap',
+      //     searchable: false,
+      //   },
+      //   {
+      //     title: 'ATH',
+      //     data: 'ath',
+      //     searchable: false,
+      //   },
+      // ],
       pagingType: 'full_numbers',
       pageLength: 25,
       serverSide: true,
@@ -114,6 +126,7 @@ export class MarketComponent implements OnInit {
       ordering: true,
       orderCellsTop: true,
       orderClasses: true,
+
       scrollY: 'calc(100vh - 230px)',
     };
   }

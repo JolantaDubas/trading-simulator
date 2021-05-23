@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-navigation',
-  templateUrl: './navigation.component.html',
-  styleUrls: ['./navigation.component.scss'],
+  selector: 'app-side-navbar',
+  templateUrl: './side-navbar.component.html',
+  styleUrls: ['./side-navbar.component.scss'],
 })
-export class NavigationComponent implements OnInit {
+export class SideNavbarComponent implements OnInit {
   sharedLinks = [
     { title: 'DASHBOARD', path: '', icon: 'fas fa-home' },
     { title: 'MARKET', path: '/market', icon: 'fas fa-coins' },

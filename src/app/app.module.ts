@@ -4,21 +4,13 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './components/header/header.component';
-import { FooterComponent } from './components/footer/footer.component';
-import { BottomHeaderComponent } from './components/bottom-header/bottom-header.component';
-import { NavigationComponent } from './components/navigation/navigation.component';
+import { SideNavbarComponent } from './modules/navigation/side-navbar/side-navbar.component';
 import { SharedModule } from './shared/shared.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { TopBarComponent } from './modules/navigation/top-bar/top-bar.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HeaderComponent,
-    FooterComponent,
-    BottomHeaderComponent,
-    NavigationComponent,
-  ],
+  declarations: [AppComponent, SideNavbarComponent, TopBarComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,

@@ -4,37 +4,42 @@
       <table
         datatable
         [dtOptions]="dtOptions"
-        class="stripe row-border order-column hover w-full"
+        class="row-border order-column hover w-full"
       >
-        <!-- <thead class="w-full">
+        <thead class="w-full">
           <tr>
             <th>Coin</th>
             <th>Last</th>
-            <th>1 h</th>
             <th>24 h</th>
-            <th>7 d</th>
+            <!--  <th>7 d</th>
             <th>30 d</th>
-            <th>1 y</th>
-            <th>ATH</th>
+            <th>1 y</th>-->
             <th>MKT CAP</th>
+            <th>ATH</th>
           </tr>
         </thead>
         <tbody *ngIf="market?.items?.length != 0">
           <tr [routerLink]="['/coin', item.id]" *ngFor="let item of market">
             <td class="flex">
               <img style="height: 20px" [src]="item.image" />
-              {{ item.name + " (" + item.symbol + ")" }}
+              {{ item.name }} ( {{ item.symbol | uppercase }} )
             </td>
             <td>{{ item.current_price }}</td>
-            <td>{{ item.price_change_percentage_1h_in_currency | number }}</td>
-            <td>{{ item.price_change_percentage_24h_in_currency | number }}</td>
-            <td>{{ item.price_change_percentage_7d_in_currency | number }}</td>
-            <td>{{ item.price_change_percentage_30d_in_currency | number }}</td>
+
+            <td class="w-1/4">
+              {{ item.price_change_24h | number }} ({{
+                item.price_change_percentage_24h_in_currency | number
+              }}%)
+            </td>
+            <td>{{ item.market_cap | number }}</td>
+            <td>{{ item.ath | number }}</td>
+
+            <!--  <td>{{ item.price_change_percentage_30d_in_currency | number }}</td>
             <td>{{ item.price_change_percentage_1y_in_currency | number }}</td>
             <td>{{ item.price_change_percentage_1y_in_currency | number }}</td>
-            <td>{{ item.price_change_percentage_1y_in_currency | number }}</td>
+            <td>{{ item.price_change_percentage_1y_in_currency | number }}</td> -->
           </tr>
-        </tbody> -->
+        </tbody>
       </table>
       <!-- <table mat-table class="w-full" [dataSource]="market" matSort>
         <ng-container matColumnDef="name">
