@@ -21,9 +21,7 @@ export class RegisterComponent implements OnInit {
     });
   }
 
-  onSubmit() {
-    console.log(this.form);
-  }
+  onSubmit() {}
   get name(): FormControl {
     return this.form.get('name') as FormControl;
   }

@@ -16,6 +16,7 @@ import { SearchComponent } from './search/search.component';
 import { SelectComponent } from './select/select.component';
 import { MatSelectModule } from '@angular/material/select';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { ShortNumberPipe } from '../core/pipes/short-number';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
     PriceChangeComponent,
     SearchComponent,
     SelectComponent,
+    ShortNumberPipe,
   ],
   imports: [
     CommonModule,
@@ -50,6 +52,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
     MatSelectModule,
     SelectComponent,
     MatAutocompleteModule,
+    ShortNumberPipe,
   ],
 })
 export class SharedModule {}

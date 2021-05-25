@@ -1,11 +1,15 @@
-<h4
+<div
   [ngStyle]="{
     color: valueChange <= 0 ? 'red' : 'green'
   }"
+  class="w-full"
 >
-  <i [ngClass]="valueChange <= 0 ? 'fas fa-arrow-down' : 'fas fa-arrow-down'">
+  <i
+    [ngClass]="valueChange <= 0 ? 'fas fa-arrow-down' : 'fas fa-arrow-up'"
+    class="text-left"
+  >
   </i>
   <!-- {{ details.market_data.price_change_24h_in_currency[currValue] }} ( -->
-  <p *ngIf="valueChange">{{ valueChange }}</p>
-  {{ percentChange }}%
-</h4>
+  {{ valueChange | shortNumber }}
+  ({{ percentChange | number }}%)
+</div>

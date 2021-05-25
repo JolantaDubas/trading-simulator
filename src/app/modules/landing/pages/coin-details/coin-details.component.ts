@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CoinGeckoService } from 'src/app/core/services/coin-gecko.service';
-import { Router, ParamMap } from '@angular/router';
 
 @Component({
   selector: 'app-coin-details',
@@ -24,7 +23,6 @@ export class CoinDetailsComponent implements OnInit {
     //   console.log('id', this.id);
     // });
     this.id = this.route.snapshot.paramMap.get('id');
-    console.log('id', this.id);
   }
 
   ngOnInit(): void {
@@ -32,7 +30,6 @@ export class CoinDetailsComponent implements OnInit {
 
     this.coinGeckoService.getCoinData(this.id).subscribe(
       (res: { coins: any[]; exchanges: any[] }) => {
-        console.log(res);
         this.details = res;
         // this.trending = res;
         // console.log(this.trending.coins);

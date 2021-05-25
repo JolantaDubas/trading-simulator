@@ -31,3 +31,12 @@ h3 {
 h4 {
   @apply text-gray-900 text-lg;
 }
+
+table {
+  @apply text-sm;
+}
+
+tr {
+  text-align: center;
+  text-align: -webkit-center;
+}

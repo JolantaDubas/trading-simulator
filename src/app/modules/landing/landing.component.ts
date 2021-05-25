@@ -22,18 +22,14 @@ export class LandingComponent implements OnInit {
 
     this.coinGeckoService.getGlobal().subscribe(
       (res: { coins: any[]; exchanges: any[] }) => {
-        console.log(res);
         this.global = res;
-        console.log('global', this.global);
       },
       (err) => console.log(err)
     );
 
     this.nomicsService.getCurrenciesTicker().subscribe(
       (res) => {
-        console.log(res);
         this.currencies = res;
-        console.log('currencies', this.currencies);
       },
       (err) => console.log(err)
     );
@@ -49,9 +45,7 @@ export class LandingComponent implements OnInit {
 
     this.coinGeckoService.getTrending().subscribe(
       (res: { coins: any[]; exchanges: any[] }) => {
-        console.log(res);
         this.trending = res;
-        console.log(this.trending.coins);
       },
       (err) => console.log(err)
     );

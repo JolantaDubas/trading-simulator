@@ -36,6 +36,12 @@ img {
 //   }
 // }
 
-::ng-deep.dataTables_wrapper {
-  width: 100%;
+::ng-deep {
+  .dataTables_wrapper {
+    width: 100%;
+  }
+
+  .dataTables_empty {
+    display: none;
+  }
 }

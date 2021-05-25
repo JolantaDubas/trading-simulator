@@ -8,6 +8,7 @@ import { MarketComponent } from './pages/market/market.component';
 import { BlockItemComponent } from './block-item/block-item.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { DiagramsComponent } from './pages/coin-details/components/diagrams/diagrams.component';
+import { SparklineComponent } from './pages/market/components/sparkline/sparkline.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { DiagramsComponent } from './pages/coin-details/components/diagrams/diag
     MarketComponent,
     BlockItemComponent,
     DiagramsComponent,
+    SparklineComponent,
   ],
   imports: [CommonModule, LandingRoutingModule, SharedModule],
 })

@@ -18,7 +18,7 @@ export class CgChartService {
     );
   }
 
-  getRangeData({ id = 'bitcoin', vs_currency = 'usd', from, to }) {
+  getRangeData({ id, vs_currency, from, to }) {
     return this.http.get(
       'https://api.coingecko.com/api/v3/coins/' + id + '/market_chart/range',
       {

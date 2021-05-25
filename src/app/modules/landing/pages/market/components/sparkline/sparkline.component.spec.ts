@@ -1,20 +1,19 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { LandingComponent } from './landing.component';
+import { SparklineComponent } from './sparkline.component';
 
-describe('LandingComponent', () => {
-  let component: LandingComponent;
-  let fixture: ComponentFixture<LandingComponent>;
+describe('SparklineComponent', () => {
+  let component: SparklineComponent;
+  let fixture: ComponentFixture<SparklineComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ LandingComponent ]
-    })
-    .compileComponents();
+      declarations: [SparklineComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(LandingComponent);
+    fixture = TestBed.createComponent(SparklineComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -9,7 +9,5 @@ export class PriceChangeComponent implements OnInit {
   @Input() percentChange: number;
   constructor() {}
 
-  ngOnInit(): void {
-    console.log('valueChangePrize', this.valueChange);
-  }
+  ngOnInit(): void {}
 }

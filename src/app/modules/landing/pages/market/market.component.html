@@ -8,7 +8,7 @@
       >
         <thead class="w-full">
           <tr>
-            <th>Coin</th>
+            <th class="w-48">Coin</th>
             <th>Last</th>
             <th>24 h</th>
             <!--  <th>7 d</th>
@@ -16,50 +16,47 @@
             <th>1 y</th>-->
             <th>MKT CAP</th>
             <th>ATH</th>
+            <th>Volume</th>
+            <th class="w-32">Last 7 days</th>
           </tr>
         </thead>
-        <tbody *ngIf="market?.items?.length != 0">
-          <tr [routerLink]="['/coin', item.id]" *ngFor="let item of market">
-            <td class="flex">
-              <img style="height: 20px" [src]="item.image" />
+        <tbody *ngIf="resultsLength != 0">
+          <tr *ngFor="let item of market">
+            <td
+              [routerLink]="['/coin', item.id]"
+              class="flex text-left cursor-pointer font-semibold w-48"
+            >
+              <div><img style="height: 20px" [src]="item.image" /></div>
               {{ item.name }} ( {{ item.symbol | uppercase }} )
             </td>
-            <td>{{ item.current_price }}</td>
-
-            <td class="w-1/4">
-              {{ item.price_change_24h | number }} ({{
-                item.price_change_percentage_24h_in_currency | number
-              }}%)
+            <td sorting="false">{{ item.current_price }}</td>
+            <td>
+              <app-price-change
+                [valueChange]="item.price_change_24h"
+                [percentChange]="item.price_change_percentage_24h_in_currency"
+              >
+              </app-price-change>
             </td>
-            <td>{{ item.market_cap | number }}</td>
-            <td>{{ item.ath | number }}</td>
-
+            <td>{{ item.market_cap | shortNumber }}</td>
+            <td>{{ item.ath | shortNumber }}</td>
+            <td>{{ item.total_volume | shortNumber }}</td>
+            <td>
+              <app-sparkline
+                [data]="item.sparkline_in_7d.price"
+              ></app-sparkline>
+            </td>
             <!--  <td>{{ item.price_change_percentage_30d_in_currency | number }}</td>
             <td>{{ item.price_change_percentage_1y_in_currency | number }}</td>
             <td>{{ item.price_change_percentage_1y_in_currency | number }}</td>
             <td>{{ item.price_change_percentage_1y_in_currency | number }}</td> -->
           </tr>
         </tbody>
+        <tbody *ngIf="resultsLength == 0">
+          <tr>
+            <td colspan="3" class="no-data-available">No data!</td>
+          </tr>
+        </tbody>
       </table>
-      <!-- <table mat-table class="w-full" [dataSource]="market" matSort>
-        <ng-container matColumnDef="name">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>Coin</th>
-          <td mat-cell *matCellDef="let item">
-            <div class="flex">
-              <img style="height: 20px" [src]="item.image" />{{ item.name }}
-            </div>
-          </td>
-        </ng-container>
-
-        <ng-container matColumnDef="market_cap">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>market_cap</th>
-          <td mat-cell *matCellDef="let item">{{ item.market_cap }}</td>
-        </ng-container>
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-
-        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-      </table> -->
     </div>
-    <!-- <mat-paginator [pageSizeOptions]="20"></mat-paginator> -->
   </app-box>
 </div>

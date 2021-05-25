@@ -20,16 +20,13 @@ export class TopBarComponent implements OnInit {
 
   ngOnInit(): void {
     this.cgListsService.getVsCurrencies().subscribe((res: string[]) => {
-      console.log(res);
       this.vsCurrencies = res.map((item) => item.toUpperCase());
     });
     this.cgListsService.getCoinsList().subscribe((res: any[]) => {
-      console.log(res);
       this.fullCoins = res;
       this.coins = res.map(
         (item) => `${item.name} (${item.symbol.toUpperCase()})`
       );
-      console.log(this.fullCoins);
     });
 
     this.vsCurrencyControl.valueChanges
@@ -44,7 +41,6 @@ export class TopBarComponent implements OnInit {
     this.coinControl.valueChanges.pipe(debounceTime(500)).subscribe((data) => {
       const findIndex = this.coins.findIndex((item) => item === data);
       if (findIndex != -1) {
-        console.log('index', findIndex);
         // this.router.navigate(['/coin/', this.fullCoins[findIndex]?.id]);
         // console.log(this.coins[data]);
 

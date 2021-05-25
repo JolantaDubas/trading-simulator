@@ -57,7 +57,6 @@ export class DiagramsComponent implements OnInit {
   currency: string;
   constructor(private cgChartService: CgChartService) {
     this.currency = localStorage.getItem('vs_currency');
-    console.log('date', Date.now());
   }
 
   ngOnInit(): void {
@@ -75,18 +74,17 @@ export class DiagramsComponent implements OnInit {
         this.setChartData();
       });
 
-    this.cgChartService
-      .getRangeData({
-        id: this.id,
-        vs_currency: this.currency,
-        from: this.updateOptionsData[this.activeOptionButton].xaxis.min,
-        to: this.updateOptionsData[this.activeOptionButton].xaxis.max,
-      })
-      .subscribe((res: any) => {
-        console.log('rangeData', res?.prices);
-        this.rangeData = res?.prices;
-        return res?.prices;
-      });
+    // this.cgChartService
+    //   .getRangeData({
+    //     id: this.id,
+    //     vs_currency: this.currency,
+    //     from: this.updateOptionsData[this.activeOptionButton].xaxis.min,
+    //     to: this.updateOptionsData[this.activeOptionButton].xaxis.max,
+    //   })
+    //   .subscribe((res: any) => {
+    //     this.rangeData = res?.prices;
+    //     return res?.prices;
+    //   });
   }
 
   setChartData() {
@@ -99,6 +97,31 @@ export class DiagramsComponent implements OnInit {
       chart: {
         type: 'area',
         height: 500,
+        // animations: {
+        //   enabled: false,
+        // },
+        events: {
+          zoomed: (chartContext, { xaxis, yaxis }) => {
+            console.log(chartContext, xaxis.min, xaxis.max);
+
+            this.generateRangeData(xaxis.min / 1000, xaxis.max / 1000);
+
+            // ...
+          },
+        },
+      },
+
+      yaxis: {
+        title: {
+          text: 'Price',
+        },
+      },
+      xaxis: {
+        type: 'datetime',
+        tickAmount: 6,
+        title: {
+          text: 'Time',
+        },
       },
       annotations: {
         // yaxis: [
@@ -113,7 +136,8 @@ export class DiagramsComponent implements OnInit {
         //       },
         //     },
         //   },
-        // ],
+        // ],\
+
         xaxis: [
           {
             x: undefined,
@@ -134,18 +158,7 @@ export class DiagramsComponent implements OnInit {
       markers: {
         size: 0,
       },
-      xaxis: {
-        type: 'datetime',
-        min: undefined,
-        tickAmount: 6,
-      },
-      yaxis: {
-        labels: {
-          formatter: function (val, index) {
-            return val.toFixed(2);
-          },
-        },
-      },
+
       tooltip: {
         x: {
           format: 'dd MMM yyyy',
@@ -240,38 +253,67 @@ export class DiagramsComponent implements OnInit {
   // }
 
   public updateOptions(option: any): void {
+    let div: number;
     this.activeOptionButton = option;
-
+    console.log('active', this.activeOptionButton);
     this.cgChartService
       .getFullData({
         id: this.id,
         vs_currency: this.currency,
-        days: this.activeOptionButton,
+        days: option,
       })
       .subscribe((res: any) => {
         this.fullData = res;
+        let filtered = res?.prices;
+
         this.chart.updateOptions(
           this.updateOptionsData[option],
-          true,
-          true,
-          true
+          false,
+          false,
+          false
         );
+        if (res?.prices.length > 500) {
+          div = Math.round(res?.prices.length / 500);
+          filtered = res?.prices.filter((a, i) => i % div === 0);
+        }
         this.chart.updateSeries(
           [
             {
-              data: this.fullData.prices,
+              data: filtered,
             },
           ],
-          true
+          false
         );
       });
   }
-  // public generateRangeData(from, to): any {
-  //   this.cgChartService
-  //     .getRangeData({ id: this.id, vs_currency: 'usd', from: from, to: to })
-  //     .subscribe((res: any) => {
-  //       console.log('rangeData', res?.prices);
-  //       return res?.prices;
-  //     });
-  // }
+  public generateRangeData(from, to): void {
+    let div: number;
+
+    this.cgChartService
+      .getRangeData({
+        id: this.id,
+        vs_currency: this.currency,
+        from: from,
+        to: to,
+      })
+      .subscribe((res: any) => {
+        console.log('rangeData', res?.prices);
+        let filtered = res?.prices;
+
+        if (res?.prices.length > 500) {
+          div = Math.round(res?.prices.length / 500);
+          filtered = res?.prices.filter((a, i) => i % div === 0);
+        }
+        this.chart.updateSeries(
+          [
+            {
+              data: filtered,
+            },
+          ],
+          false
+        );
+
+        return res?.prices;
+      });
+  }
 }

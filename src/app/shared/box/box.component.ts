@@ -11,8 +11,5 @@ export class BoxComponent implements OnInit {
   @Input() link?: string;
   constructor() {}
 
-  ngOnInit(): void {
-    console.log('link', this.link);
-    console.log('showBtn', this.showBtn);
-  }
+  ngOnInit(): void {}
 }
