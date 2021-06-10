@@ -25,16 +25,16 @@ export class CoinGeckoService {
   getCoinData(id: string) {
     return this.http.get('https://api.coingecko.com/api/v3/coins/' + id);
   }
-  getMarketData(params: DataTablesParameters, { curr = 'usd' }) {
+  getMarketData(curr = 'usd', params?: DataTablesParameters) {
     return this.http.get('https://api.coingecko.com/api/v3/coins/markets/', {
       params: {
         vs_currency: curr,
         order:
-          params.columns[params.order[0]?.column].data +
+          params?.columns[params?.order[0]?.column].data +
             '_' +
-            params.order[0].dir || 'market_cap_desc',
-        per_page: params.length.toString() || '25',
-        page: (params.start / params.length + 1).toString() || '1',
+            params?.order[0].dir || 'market_cap_desc',
+        per_page: params?.length > 0 ? params?.length.toString() : '7',
+        page: (params?.start / params?.length + 1).toString() || '1',
         sparkline: 'true',
         price_change_percentage: '24h',
       },

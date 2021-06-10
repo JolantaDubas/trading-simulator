@@ -1,11 +1,23 @@
-<div class="w-full h-full rounded shadow-md bg-white">
-  <div class="p-6">
-    <div class="flex justify-between items-center">
-      <div *ngIf="title">
-        <i *ngIf="icon" class="{{ icon }}"></i>{{ title }}:
-      </div>
-      <a *ngIf="link" [routerLink]="link" class="btn mainBtn"> See more </a>
+<div class="w-full h-full rounded-lg shadow-md bg-white overflow-hidden">
+  <div
+    *ngIf="title"
+    class="
+      flex
+      justify-between
+      items-center
+      border-b
+      bg-gray-50
+      border-gray-300
+      px-6
+      h-16
+    "
+  >
+    <div class="text-xl">
+      <i *ngIf="icon" class="{{ icon }}"></i>{{ title }}:
     </div>
-    <ng-content class="m-4"></ng-content>
+    <a *ngIf="link" [routerLink]="link" class="btn mainBtn"> See more </a>
+  </div>
+  <div class="px-6 py-4">
+    <ng-content></ng-content>
   </div>
 </div>

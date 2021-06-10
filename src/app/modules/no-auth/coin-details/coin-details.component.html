@@ -1,0 +1,51 @@
+<div *ngIf="!loading" class="w-full p-8 grid gap-6">
+  <app-box>
+    <div class="grid grid-cols-2 justify-between">
+      <div class="flex">
+        <img class="w-12 h-12 mr-3" [src]="details?.image?.small" />
+        <div class="grid">
+          <h1>{{ details.name }}</h1>
+          <h4>{{ details.symbol | uppercase }}</h4>
+        </div>
+      </div>
+      <div class="grid justify-items-end">
+        <h1>
+          {{
+            details.market_data.current_price[currency]
+              | currency: currencyUpper
+          }}
+        </h1>
+        <h4 style="width: 12px"></h4>
+        <app-price-change
+          class="text-lg"
+          [percentChange]="
+            details.market_data.price_change_percentage_24h_in_currency[
+              currency
+            ]
+          "
+        >
+        </app-price-change>
+      </div>
+    </div>
+  </app-box>
+
+  <app-box>
+    <app-diagrams [id]="id"></app-diagrams>
+  </app-box>
+
+  <app-box title="Market data">
+    <app-details
+      [data]="details.market_data"
+      [currency]="currency"
+    ></app-details>
+  </app-box>
+  <!-- <app-box title="Statistics"> </app-box> -->
+  <app-box title="Description">
+    <p [innerHTML]="details.description?.en"></p>
+  </app-box>
+  <!-- <div class="main" style="display: flex">
+    <div class="descr">
+      <p [innerHTML]="details?.description?.pl"></p>
+    </div>
+  </div> -->
+</div>

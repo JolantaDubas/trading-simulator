@@ -9,15 +9,13 @@ export class NomicsService {
 
   constructor(private http: HttpClient) {}
 
-  getCurrenciesTicker() {
-    return this.http.get('https://api.nomics.com/v1/currencies/ticker', {
+  getMarketCap({ start, end, currency }) {
+    return this.http.get('https://api.nomics.com/v1/market-cap/history', {
       params: {
         key: this.normicsKey,
-        ids: 'BroadcastChannel,ETH',
-        interval: '1d,30d',
-        convert: 'EUR',
-        'per-page': '100',
-        page: '1',
+        start: start,
+        end: end || '2020-10-02T10:00:00-05:00',
+        currency: currency,
       },
     });
   }

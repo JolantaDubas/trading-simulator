@@ -5,7 +5,7 @@ const routes: Routes = [
   {
     path: '',
     loadChildren: () =>
-      import('./modules/landing/landing.module').then((m) => m.LandingModule),
+      import('./modules/no-auth/no-auth.module').then((m) => m.NoAuthModule),
   },
   {
     path: 'shared',
@@ -13,7 +13,7 @@ const routes: Routes = [
       import('./shared/shared.module').then((m) => m.SharedModule),
   },
   {
-    path: '',
+    path: 'auth',
     loadChildren: () =>
       import('./modules/auth/auth.module').then((m) => m.AuthModule),
   },

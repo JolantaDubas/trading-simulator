@@ -15,8 +15,12 @@ export class SideNavbarComponent implements OnInit {
     { title: 'LOGOUT', path: '/logout', icon: 'fas fa-key' },
   ];
   logoutUser = [
-    { title: 'LOGIN', path: '/login', icon: 'fas fa-key' },
-    { title: 'REGISTER', path: '/register', icon: 'fas fa-clipboard-list' },
+    { title: 'LOGIN', path: '/auth/login', icon: 'fas fa-key' },
+    {
+      title: 'REGISTER',
+      path: '/auth/register',
+      icon: 'fas fa-clipboard-list',
+    },
   ];
   constructor() {}
 

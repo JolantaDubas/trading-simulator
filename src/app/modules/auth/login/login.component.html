@@ -1,4 +1,19 @@
-<div class="grid h-full w-full">
-  <app-box title="Login" class="w-96 h-auto self-center justify-self-center">
+<div class="grid w-full h-navScreen">
+  <app-box title="Login" class="w-96 self-center justify-self-center">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="grid gap-4">
+      <app-input
+        label="Email"
+        type="email"
+        [control]="email"
+        placeholder="Enter your email"
+      ></app-input>
+      <app-input
+        label="Password"
+        type="password"
+        [control]="password"
+        placeholder="Enter your password"
+      ></app-input>
+      <button class="btn mainBtn">Log in</button>
+    </form>
   </app-box>
 </div>

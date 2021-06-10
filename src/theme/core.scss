@@ -8,6 +8,43 @@ select {
   min-width: 100px;
 }
 
+[type="text"],
+[type="email"],
+[type="url"],
+[type="password"],
+[type="number"],
+[type="date"],
+[type="datetime-local"],
+[type="month"],
+[type="search"],
+[type="tel"],
+[type="time"],
+[type="week"],
+[multiple],
+textarea,
+select {
+  border: 0;
+  padding: 0;
+}
+
+[type="text"]:focus,
+[type="email"]:focus,
+[type="url"]:focus,
+[type="password"]:focus,
+[type="number"]:focus,
+[type="date"]:focus,
+[type="datetime-local"]:focus,
+[type="month"]:focus,
+[type="search"]:focus,
+[type="tel"]:focus,
+[type="time"]:focus,
+[type="week"]:focus,
+[multiple]:focus,
+textarea:focus,
+select:focus {
+  box-shadow: none;
+}
+
 h1 {
   @apply text-primary-blue text-3xl;
 }
@@ -17,19 +54,19 @@ a {
 }
 
 p {
-  @apply text-gray-900 text-base;
+  @apply text-gray-500 text-sm;
 }
 
 h2 {
-  @apply text-2xl text-gray-900;
+  @apply text-2xl text-gray-800;
 }
 
 h3 {
-  @apply text-xl text-gray-900;
+  @apply text-xl text-gray-800;
 }
 
 h4 {
-  @apply text-gray-900 text-lg;
+  @apply text-gray-800 text-base;
 }
 
 table {

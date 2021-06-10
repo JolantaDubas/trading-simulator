@@ -1,0 +1,67 @@
+<div *ngIf="fullData">
+  <div>
+    <div class="w-full flex justify-between pb-5">
+      <div class="flex">
+        <h1 class="pr-2">{{ current | currency: currency }}</h1>
+        <app-price-change [percentChange]="percentChange"></app-price-change>
+      </div>
+      <div>
+        <button
+          (click)="updateOptions('1')"
+          [class.active]="activeOptionButton == '1'"
+        >
+          1D
+        </button>
+        <button
+          (click)="updateOptions('7')"
+          [class.active]="activeOptionButton == '7'"
+        >
+          1W
+        </button>
+        <button
+          (click)="updateOptions('14')"
+          [class.active]="activeOptionButton == '14'"
+        >
+          2W
+        </button>
+        <button
+          (click)="updateOptions('30')"
+          [class.active]="activeOptionButton == '30'"
+        >
+          1M
+        </button>
+
+        <button
+          (click)="updateOptions('max')"
+          [class.active]="activeOptionButton == 'max'"
+        >
+          All
+        </button>
+      </div>
+    </div>
+    <apx-chart
+      #chart
+      [series]="chartOptions.series"
+      [chart]="chartOptions.chart"
+      [colors]="chartOptions.colors"
+      [yaxis]="chartOptions.yaxis"
+      [dataLabels]="chartOptions.dataLabels"
+      [markers]="chartOptions.markers"
+      [stroke]="chartOptions.stroke"
+      [grid]="chartOptions.grid"
+      [xaxis]="chartOptions.xaxis"
+      [tooltip]="chartOptions.tooltip"
+      [annotations]="chartOptions.annotations"
+    ></apx-chart>
+  </div>
+  <!-- <div id="chart-line2">
+    <apx-chart
+      [series]="chartOptions2.series"
+      [chart]="chartOptions2.chart"
+      [xaxis]="chartOptions2.xaxis"
+      [colors]="chartOptions2.colors"
+      [fill]="chartOptions2.fill"
+      [yaxis]="chartOptions2.yaxis"
+    ></apx-chart>
+  </div> -->
+</div>

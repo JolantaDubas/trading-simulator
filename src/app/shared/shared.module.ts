@@ -18,6 +18,9 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { ShortNumberPipe } from '../core/pipes/short-number';
 
+import { PieChartComponent } from './pie-chart/pie-chart.component';
+import { InputComponent } from './input/input.component';
+
 @NgModule({
   declarations: [
     BoxComponent,
@@ -25,6 +28,8 @@ import { ShortNumberPipe } from '../core/pipes/short-number';
     SearchComponent,
     SelectComponent,
     ShortNumberPipe,
+    PieChartComponent,
+    InputComponent,
   ],
   imports: [
     CommonModule,
@@ -53,6 +58,8 @@ import { ShortNumberPipe } from '../core/pipes/short-number';
     SelectComponent,
     MatAutocompleteModule,
     ShortNumberPipe,
+    PieChartComponent,
+    InputComponent,
   ],
 })
 export class SharedModule {}

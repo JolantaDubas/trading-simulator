@@ -1,0 +1,66 @@
+<div class="w-full">
+  <table
+    datatable
+    [dtOptions]="dtOptions"
+    class="row-border order-column hover w-full"
+  >
+    <thead class="w-full">
+      <tr>
+        <th class="w-48">Coin</th>
+        <th>Last</th>
+        <th>24 h</th>
+        <th>MKT CAP</th>
+        <th>ATH</th>
+        <th>Volume</th>
+        <th class="w-32">Last 7 days</th>
+      </tr>
+    </thead>
+    <tbody *ngIf="resultsLength != 0">
+      <tr *ngFor="let item of market">
+        <td
+          [routerLink]="['/coin', item.id]"
+          class="cursor-pointer font-semibold w-48"
+        >
+          <div class="flex">
+            <img class="h-6 mr-2" [src]="item.image" />
+            {{ item.name }}
+            <span class="text-gray-500 ml-2">{{
+              item.symbol | uppercase
+            }}</span>
+          </div>
+        </td>
+        <td sorting="false">
+          {{ item.current_price | currency: currency }}
+        </td>
+        <td>
+          <app-price-change
+            [valueChange]="item.price_change_24h"
+            [currency]="currency"
+            [percentChange]="item.price_change_percentage_24h_in_currency"
+          >
+          </app-price-change>
+        </td>
+        <td>
+          {{ checkIfNull(item.market_cap | shortNumber) }}
+        </td>
+        <td>{{ item.ath | currency: currency }}</td>
+        <td>{{ item.total_volume | shortNumber }}</td>
+        <td>
+          <app-sparkline
+            [data]="item.sparkline_in_7d.price"
+            [currency]="currency"
+          ></app-sparkline>
+        </td>
+        <!--  <td>{{ item.price_change_percentage_30d_in_currency | number }}</td>
+          <td>{{ item.price_change_percentage_1y_in_currency | number }}</td>
+          <td>{{ item.price_change_percentage_1y_in_currency | number }}</td>
+          <td>{{ item.price_change_percentage_1y_in_currency | number }}</td> -->
+      </tr>
+    </tbody>
+    <tbody *ngIf="resultsLength == 0">
+      <tr>
+        <td colspan="3" class="no-data-available">No data!</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

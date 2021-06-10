@@ -1,15 +1,18 @@
 <div
+  *ngIf="valueChange || percentChange"
   [ngStyle]="{
-    color: valueChange <= 0 ? 'red' : 'green'
+    color: percentChange <= 0 ? 'red' : 'green'
   }"
-  class="w-full"
 >
   <i
-    [ngClass]="valueChange <= 0 ? 'fas fa-arrow-down' : 'fas fa-arrow-up'"
-    class="text-left"
+    [ngClass]="percentChange <= 0 ? 'fas fa-arrow-down' : 'fas fa-arrow-up'"
+    class="text-left mr-2"
   >
   </i>
-  <!-- {{ details.market_data.price_change_24h_in_currency[currValue] }} ( -->
-  {{ valueChange | shortNumber }}
-  ({{ percentChange | number }}%)
+  <!-- {{ details.market_data.price_change_24h_in_currency[valueChange] }} -->
+  <span *ngIf="valueChange">{{ valueChange | currency: currency }} (</span
+  ><span class="whitespace-nowrap" *ngIf="percentChange"
+    >{{ percentChange | number }} %<span *ngIf="valueChange">)</span></span
+  >
 </div>
+<div *ngIf="!valueChange && !percentChange">-</div>

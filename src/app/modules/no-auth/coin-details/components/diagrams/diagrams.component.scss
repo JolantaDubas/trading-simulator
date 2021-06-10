@@ -1,0 +1,11 @@
+button {
+  @apply bg-transparent px-4 py-1 text-gray-400 font-semibold;
+}
+
+button.active {
+  @apply text-primary-blue bg-light-blue;
+}
+
+button:focus {
+  outline: 0;
+}

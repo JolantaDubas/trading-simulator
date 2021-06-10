@@ -1,0 +1,112 @@
+<div class="grid grid-cols-4 justify-between gap-4">
+  <div>
+    <p>Market Cap Rank:</p>
+    <h4># {{ checkIfNull(data.market_cap_rank) }}</h4>
+    <p>Market Capitalization:</p>
+    <h4>
+      {{ data.market_cap[currency] | currency: (currency | uppercase) }}
+    </h4>
+    <p>24h Market Cap Change:</p>
+    <h4>
+      <app-price-change
+        [valueChange]="data.market_cap_change_24h_in_currency[currency]"
+        [currency]="currency | uppercase"
+        [percentChange]="
+          data.market_cap_change_percentage_24h_in_currency[currency]
+        "
+      ></app-price-change>
+    </h4>
+  </div>
+  <div>
+    <p>Current Price:</p>
+    <h4>
+      {{ data.current_price[currency] | currency: (currency | uppercase) }}
+    </h4>
+    <p>24h Price Change</p>
+    <h4>
+      <app-price-change
+        [valueChange]="data.price_change_24h_in_currency[currency]"
+        [currency]="currency | uppercase"
+        [percentChange]="data.price_change_percentage_24h_in_currency[currency]"
+      ></app-price-change>
+    </h4>
+    <p>24h Low / 24h High:</p>
+    <h4>
+      {{
+        checkIfNull(data.low_24h[currency] | currency: (currency | uppercase))
+      }}
+      /
+      {{
+        checkIfNull(data.high_24h[currency] | currency: (currency | uppercase))
+      }}
+    </h4>
+  </div>
+  <div>
+    <p>Total Supply:</p>
+    <h4>
+      {{ checkIfNull(data.total_supply | currency: (currency | uppercase)) }}
+    </h4>
+    <div class="flex">
+      <div>
+        <p>Circulating Supply:</p>
+        <h4>
+          {{
+            checkIfNull(
+              data.circulating_supply | currency: (currency | uppercase)
+            )
+          }}
+        </h4>
+      </div>
+      <app-pie-chart
+        [current]="data.circulating_supply"
+        [full]="data.total_supply"
+        [currency]="currency"
+      ></app-pie-chart>
+    </div>
+    <p>Total Volume:</p>
+    <h4>
+      {{
+        checkIfNull(
+          data.total_volume[currency] | currency: (currency | uppercase)
+        )
+      }}
+    </h4>
+
+    <!-- <p>Fully Diluted Valuation:</p>
+    <h4>
+      {{
+        checkIfNull(
+          data.fully_diluted_valuation[currency]
+            | currency: (currency | uppercase)
+        )
+      }}
+    </h4> -->
+  </div>
+  <div>
+    <p>All-Time High:</p>
+
+    <h4 class="flex">
+      {{ data.ath[currency] | currency: (currency | uppercase) }}
+      <!-- <app-price-change
+          class="text-xs"
+          [percentChange]="
+            data.ath_change_percentage[currency]
+          "
+        ></app-price-change> -->
+    </h4>
+    <p>ATH Date:</p>
+    <h4>{{ data.ath_date[currency] | date }}</h4>
+    <div class="flex">
+      <div>
+        <p>% of ATH:</p>
+        <h4>{{ percentATH | number }} %</h4>
+      </div>
+
+      <app-pie-chart
+        [current]="data.current_price[currency]"
+        [full]="data.ath[currency]"
+        [currency]="currency"
+      ></app-pie-chart>
+    </div>
+  </div>
+</div>

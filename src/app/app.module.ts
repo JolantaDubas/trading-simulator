@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -9,6 +9,12 @@ import { SharedModule } from './shared/shared.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TopBarComponent } from './modules/navigation/top-bar/top-bar.component';
 
+import localePt from '@angular/common/locales/fr-BE';
+import { registerLocaleData } from '@angular/common';
+
+// Register the localization
+//registerLocaleData(localePt, 'fr-BE');
+
 @NgModule({
   declarations: [AppComponent, SideNavbarComponent, TopBarComponent],
   imports: [
@@ -18,7 +24,13 @@ import { TopBarComponent } from './modules/navigation/top-bar/top-bar.component'
     HttpClientModule,
     SharedModule,
   ],
-  providers: [HttpClientModule],
+  providers: [
+    HttpClientModule,
+    // {
+    //   provide: LOCALE_ID,
+    //   useValue: 'fr-BE', // 'de-DE' for Germany, 'fr-FR' for France ...
+    // },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

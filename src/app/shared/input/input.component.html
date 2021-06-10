@@ -1,0 +1,35 @@
+<div>
+  <mat-form-field
+    [id]="id"
+    class="w-full"
+    appearance="outline"
+    [ngClass]="{ error: control.errors && control.dirty }"
+  >
+    <mat-label>{{ label }}</mat-label>
+    <input
+      #fieldName
+      [type]="type"
+      [placeholder]="placeholder"
+      matInput
+      [formControl]="control"
+      autocomplete="off"
+      [type]="hide ? 'password' : 'text'"
+    />
+    <button
+      class="self-center"
+      *ngIf="type === 'password'"
+      mat-icon-button
+      matSuffix
+      (click)="hide = !hide"
+    >
+      <i [ngClass]="hide ? 'fa fa-eye-slash' : 'fas fa-eye'"></i>
+    </button>
+  </mat-form-field>
+  <mat-error *ngIf="control.errors && control.dirty" class="text-xs">{{
+    control.errors?.message
+  }}</mat-error>
+  <!-- 
+  <p class="error" *ngIf="control.errors && control.dirty">
+    {{ control.errors?.message }}
+  </p> -->
+</div>
