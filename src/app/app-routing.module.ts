@@ -1,22 +1,25 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { UserGuard } from './core/guards/user.guard';
 
 const routes: Routes = [
-  {
-    path: '',
-    loadChildren: () =>
-      import('./modules/no-auth/no-auth.module').then((m) => m.NoAuthModule),
-  },
   {
     path: 'shared',
     loadChildren: () =>
       import('./shared/shared.module').then((m) => m.SharedModule),
   },
   {
-    path: 'auth',
+    path: 'user',
     loadChildren: () =>
       import('./modules/auth/auth.module').then((m) => m.AuthModule),
+    canActivate: [UserGuard],
   },
+  {
+    path: '',
+    loadChildren: () =>
+      import('./modules/no-auth/no-auth.module').then((m) => m.NoAuthModule),
+  },
+  { path: '**', redirectTo: '' },
 ];
 
 @NgModule({

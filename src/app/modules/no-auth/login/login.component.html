@@ -1,5 +1,5 @@
 <div class="grid w-full h-navScreen">
-  <app-box title="Login" class="w-96 self-center justify-self-center">
+  <app-box title="Login" class="w-1/4 justify-self-center pt-20 mb-auto">
     <form [formGroup]="form" (ngSubmit)="onSubmit()" class="grid gap-4">
       <app-input
         label="Email"
@@ -15,5 +15,8 @@
       ></app-input>
       <button class="btn mainBtn">Log in</button>
     </form>
+    <p class="pt-4">
+      Don't have an Account? <a routerLink="/auth/register">Register here</a>
+    </p>
   </app-box>
 </div>

@@ -39,8 +39,8 @@ export class PieChartComponent implements OnInit {
   market: any;
   trending: any[];
   currencies: any;
-  dtOptions: DataTables.Settings;
-  dtOptionsTrending: DataTables.Settings;
+  dtOptions: any;
+  dtOptionsTrending: any;
 
   constructor() {}
 

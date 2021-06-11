@@ -10,7 +10,8 @@ import { DiagramsComponent } from './coin-details/components/diagrams/diagrams.c
 import { SparklineComponent } from './market/components/sparkline/sparkline.component';
 import { TableComponent } from './market/components/table/table.component';
 import { DetailsComponent } from './coin-details/components/details/details.component';
-
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
 @NgModule({
   declarations: [
     LandingComponent,
@@ -20,6 +21,8 @@ import { DetailsComponent } from './coin-details/components/details/details.comp
     SparklineComponent,
     TableComponent,
     DetailsComponent,
+    LoginComponent,
+    RegisterComponent,
   ],
   imports: [CommonModule, NoAuthRoutingModule, SharedModule],
 })

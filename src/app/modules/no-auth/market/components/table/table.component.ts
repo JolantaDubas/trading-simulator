@@ -9,7 +9,7 @@ import { DataTablesParameters } from 'src/app/core/models/dataTablesParameters';
   styleUrls: ['./table.component.scss'],
 })
 export class TableComponent implements OnInit {
-  @Input() dtOptions: DataTables.Settings;
+  @Input() dtOptions: any;
   @Input() currency: string;
 
   market: object[];

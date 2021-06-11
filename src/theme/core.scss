@@ -77,3 +77,24 @@ tr {
   text-align: center;
   text-align: -webkit-center;
 }
+
+.mat-simple-snackbar {
+  & > span {
+    font-size: 1.6rem;
+  }
+}
+
+.snackbar-warning {
+  background-color: #040a29;
+  color: white;
+}
+
+.snackbar-error {
+  background-color: red;
+  color: white;
+}
+
+.snackbar-success {
+  background-color: #27ae61;
+  color: white;
+}

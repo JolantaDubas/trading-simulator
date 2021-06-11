@@ -12,6 +12,8 @@ import { TopBarComponent } from './modules/navigation/top-bar/top-bar.component'
 import localePt from '@angular/common/locales/fr-BE';
 import { registerLocaleData } from '@angular/common';
 
+import { ToastrModule } from 'ngx-toastr';
+import { JwtModule } from '@auth0/angular-jwt';
 // Register the localization
 //registerLocaleData(localePt, 'fr-BE');
 
@@ -23,6 +25,8 @@ import { registerLocaleData } from '@angular/common';
     AppRoutingModule,
     HttpClientModule,
     SharedModule,
+    // JwtModule.forRoot({}),
+    ToastrModule.forRoot(),
   ],
   providers: [
     HttpClientModule,
