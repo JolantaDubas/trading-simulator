@@ -6,30 +6,31 @@
   >
     <thead class="w-full">
       <tr>
-        <th class="w-48">Coin</th>
+        <th>Coin</th>
         <th>Last</th>
         <th>24 h</th>
         <th>MKT CAP</th>
         <th>ATH</th>
         <th>Volume</th>
-        <th class="w-32">Last 7 days</th>
+        <th class="w-32">Last 7 days (USD)</th>
+        <th *ngIf="loggedIn">Actions</th>
       </tr>
     </thead>
     <tbody *ngIf="resultsLength != 0">
       <tr *ngFor="let item of market">
         <td
           [routerLink]="['/coin', item.id]"
-          class="cursor-pointer font-semibold w-48"
+          class="cursor-pointer font-semibold"
         >
           <div class="flex">
-            <img class="h-6 mr-2" [src]="item.image" />
-            {{ item.name }}
-            <span class="text-gray-500 ml-2">{{
-              item.symbol | uppercase
-            }}</span>
+            <img class="h-6 w-6 mr-2" [src]="item.image" />
+            <p class="text-gray-900 text-left">
+              {{ item.name }}
+              <span class="text-gray-500">{{ item.symbol | uppercase }}</span>
+            </p>
           </div>
         </td>
-        <td sorting="false">
+        <td>
           {{ item.current_price | currency: currency }}
         </td>
         <td>
@@ -45,7 +46,7 @@
         </td>
         <td>{{ item.ath | currency: currency }}</td>
         <td>{{ item.total_volume | shortNumber }}</td>
-        <td>
+        <td class="w-32 ml-auto">
           <app-sparkline
             [data]="item.sparkline_in_7d.price"
             [currency]="currency"
@@ -55,6 +56,9 @@
           <td>{{ item.price_change_percentage_1y_in_currency | number }}</td>
           <td>{{ item.price_change_percentage_1y_in_currency | number }}</td>
           <td>{{ item.price_change_percentage_1y_in_currency | number }}</td> -->
+        <th *ngIf="loggedIn && wallet">
+          <app-buy-sell [coin]="item.id"></app-buy-sell>
+        </th>
       </tr>
     </tbody>
     <tbody *ngIf="resultsLength == 0">

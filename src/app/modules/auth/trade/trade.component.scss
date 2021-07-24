@@ -1,0 +1,7 @@
+::ng-deep {
+  .mat-accent .mat-slider-track-fill,
+  .mat-accent .mat-slider-thumb,
+  .mat-accent .mat-slider-thumb-label {
+    @apply bg-primary;
+  }
+}

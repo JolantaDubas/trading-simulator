@@ -1,8 +1,7 @@
 export interface User {
-  token?: string;
-  refreshToken?: string;
-  expirationTime?: string;
-  userId?: number;
-  email?: string;
-  role?: 'RECRUITER' | 'JOB_SEEKER';
+  id: number;
+  user_name: string;
+  password: string;
+  email: string;
+  account_balance: number;
 }

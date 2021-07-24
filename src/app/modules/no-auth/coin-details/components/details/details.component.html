@@ -71,28 +71,12 @@
         )
       }}
     </h4>
-
-    <!-- <p>Fully Diluted Valuation:</p>
-    <h4>
-      {{
-        checkIfNull(
-          data.fully_diluted_valuation[currency]
-            | currency: (currency | uppercase)
-        )
-      }}
-    </h4> -->
   </div>
   <div>
     <p>All-Time High:</p>
 
     <h4 class="flex">
       {{ data.ath[currency] | currency: (currency | uppercase) }}
-      <!-- <app-price-change
-          class="text-xs"
-          [percentChange]="
-            data.ath_change_percentage[currency]
-          "
-        ></app-price-change> -->
     </h4>
     <p>ATH Date:</p>
     <h4>{{ data.ath_date[currency] | date }}</h4>

@@ -1,7 +1,8 @@
-<div class="relative">
-  <div class="absolute h-96 bg-primary-blue w-full"></div>
-  <div class="p-8 w-full grid gap-6">
-    <div class="z-10 grid grid-cols-4 gap-6">
+<div class="w-full">
+  <div class="relative -m-8">
+    <div class="absolute h-96 bg-primary-blue w-full"></div>
+    <div class="p-8 w-full grid gap-6">
+      <!-- <div class="z-10 grid grid-cols-4 gap-6">
       <app-box title="Active cryptocurrencies">
         <p>
           <a [routerLink]="['/market']">{{
@@ -14,73 +15,75 @@
         <p>{{ global?.data?.market_cap_change_percentage_24h_usd }}</p></app-box
       >
       <app-box *ngIf="chartOptions" title="Dominance">
-        <!-- <p>
-          <a [routerLink]="['/coin/bitcoin']">
-            BTC:
-            {{ global?.data?.market_cap_percentage?.btc.toFixed(2) }}% </a
-          >,
-          <a [routerLink]="['/coin/ethereum']"
-            >ETH: {{ global?.data?.market_cap_percentage?.eth.toFixed(2) }}%</a
-          >
-        </p> -->
-        <div id="chart">
-          <apx-chart
-            [series]="chartOptions.series"
-            [chart]="chartOptions.chart"
-            [labels]="chartOptions.labels"
-            [responsive]="chartOptions.responsive"
-            [theme]="chartOptions.theme"
-            [dataLabels]="chartOptions.dataLabels"
-            [legend]="chartOptions.legend"
-          ></apx-chart>
+        <div class="grid grid-cols-2">
+          <div class="grid">
+            <a [routerLink]="['/coin/bitcoin']">
+              BTC:
+              {{ global?.data?.market_cap_percentage?.btc.toFixed(2) }}%
+            </a>
+            <a [routerLink]="['/coin/ethereum']"
+              >ETH:
+              {{ global?.data?.market_cap_percentage?.eth.toFixed(2) }}%</a
+            >
+          </div>
+          <div id="chart">
+            <apx-chart
+              [series]="chartOptions.series"
+              [chart]="chartOptions.chart"
+              [labels]="chartOptions.labels"
+              [responsive]="chartOptions.responsive"
+              [theme]="chartOptions.theme"
+              [dataLabels]="chartOptions.dataLabels"
+              [legend]="chartOptions.legend"
+              [tooltip]="chartOptions.tooltip"
+            ></apx-chart>
+          </div>
         </div>
       </app-box>
-    </div>
-    <app-box
-      class="z-10"
-      title="Market Capitalization"
-      showBtn="true"
-      link="/coin/bitcoin"
-    >
-      <app-diagrams id="market_cap"></app-diagrams>
-    </app-box>
-    <div
-      class="grid gap-4 justify-between"
-      style="grid-template-columns: 75% auto"
-    >
-      <app-box title="Market" showBtn="true" link="/market" class="z-10">
-        <app-table [dtOptions]="dtOptions" [currency]="currency"></app-table
-      ></app-box>
-      <app-box class="z-10" title="Trending">
-        <table
-          *ngIf="trending"
-          datatable
-          [dtOptions]="dtOptionsTrending"
-          class="row-border order-column hover w-full"
-        >
-          <thead class="w-full">
-            <tr>
-              <th class="w-48">Coin</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let item of trending">
-              <td
-                [routerLink]="['/coin', item.item.id]"
-                class="cursor-pointer font-semibold w-48"
-              >
-                <div class="flex items-center h-10">
-                  <img class="h-5 mr-2" [src]="item.item.small" />
-                  {{ item.item.name }}
-                  <span class="text-gray-500 ml-2">{{
-                    item.item.symbol | uppercase
-                  }}</span>
-                </div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+    </div> -->
+      <app-box class="z-10" title="Market Capitalization">
+        <app-diagrams id="market_cap"></app-diagrams>
       </app-box>
+      <div
+        class="grid gap-4 justify-between"
+        style="grid-template-columns: 3fr 1fr"
+      >
+        <app-box title="Market" showBtn="true" link="/market" class="z-10">
+          <app-table [dtOptions]="dtOptions" [currency]="currency"></app-table
+        ></app-box>
+        <app-box class="z-10" title="Trending">
+          <table
+            *ngIf="trending"
+            datatable
+            [dtOptions]="dtOptionsTrending"
+            class="row-border order-column hover w-full"
+          >
+            <thead class="w-full">
+              <tr>
+                <th class="w-48">Coin</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of trending">
+                <td
+                  [routerLink]="['/coin', item.item.id]"
+                  class="cursor-pointer font-semibold w-48"
+                >
+                  <div class="flex items-center h-10">
+                    <img class="h-6 w-6 mr-2" [src]="item.item.small" />
+                    <p class="text-gray-900 text-left">
+                      {{ item.item.name }}
+                      <span class="text-gray-500">{{
+                        item.item.symbol | uppercase
+                      }}</span>
+                    </p>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </app-box>
+      </div>
     </div>
   </div>
 </div>

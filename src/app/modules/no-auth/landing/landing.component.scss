@@ -1,17 +1,4 @@
-:host {
-  width: 100%;
-}
-
-.table {
-  @apply w-full;
-}
-
-.main {
-  background: var(--text-color);
-}
-
 #chart {
-  max-width: 200px;
-  margin: 35px auto;
+  max-width: 120px;
   padding: 0;
 }

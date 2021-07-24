@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { email, password, required } from 'src/app/core/validators';
-import { AuthService } from 'src/app/core/services/auth.service';
-import { ToastrService } from 'ngx-toastr';
-import { Request } from '../../../core/models/request';
+import { AuthService } from 'src/app/core/auth/auth.service';
+import { ResponseModel } from '../../../core/models/responseModel';
 import { SnackBarService } from 'src/app/core/services/snackBar.service';
 import { catchError } from 'rxjs/operators';
 import { HttpErrorResponse } from '@angular/common/http';
 import { throwError } from 'rxjs';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -19,7 +19,8 @@ export class RegisterComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
-    private snackBar: SnackBarService
+    private snackBar: SnackBarService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -46,13 +47,11 @@ export class RegisterComponent implements OnInit {
           return throwError(error);
         })
       )
-      .subscribe((res: Request) => {
+      .subscribe((res: ResponseModel) => {
         console.log('register', res);
 
         this.snackBar.showSuccess(res.message, 'success');
-        // this.snackBar.showInfo(res.message, 'info');
-        // this.snackBar.showError(res.message, 'error');
-        // this.snackBar.showWarning(res.message, 'warning');
+        this.router.navigate(['auth/login']);
       });
   }
   get name(): FormControl {

@@ -1,0 +1,6 @@
+<app-box title="My wallet">
+  <div *ngFor="let item of wallet" class="flex">
+    <h4>{{ item.currency }}: {{ item.amount }}</h4>
+    <p *ngIf="item.currency !== 'eur'">{{ change[item.currency][currency] }}</p>
+  </div>
+</app-box>

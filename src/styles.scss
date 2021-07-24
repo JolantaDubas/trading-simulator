@@ -1,11 +1,7 @@
 @import "tailwindcss/base";
-@import "tailwindcss/components";
+// @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 @import "theme/core";
 @import "theme/shared.scss";
 @import "~ngx-toastr/toastr";
-
-html,
-body {
-  @apply h-full w-full;
-}
+@import "~ngx-smart-modal/ngx-smart-modal";

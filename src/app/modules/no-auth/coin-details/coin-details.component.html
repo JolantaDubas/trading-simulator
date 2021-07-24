@@ -1,4 +1,4 @@
-<div *ngIf="!loading" class="w-full p-8 grid gap-6">
+<div *ngIf="!loading" class="w-full grid gap-6">
   <app-box>
     <div class="grid grid-cols-2 justify-between">
       <div class="flex">
@@ -7,7 +7,12 @@
           <h1>{{ details.name }}</h1>
           <h4>{{ details.symbol | uppercase }}</h4>
         </div>
+        <app-buy-sell
+          class="pl-6 self-center"
+          [coin]="details.id"
+        ></app-buy-sell>
       </div>
+
       <div class="grid justify-items-end">
         <h1>
           {{

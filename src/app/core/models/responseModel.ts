@@ -1,4 +1,5 @@
-export interface Request {
+export interface ResponseModel {
+  data: any;
   token: string;
   message: string;
   status: number;

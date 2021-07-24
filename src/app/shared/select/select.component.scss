@@ -1,33 +1,33 @@
-:host {
-  display: block;
+// :host {
+//   display: block;
 
-  .container {
-    font-size: 1rem;
-    z-index: 100;
+//   .container {
+//     font-size: 1rem;
+//     z-index: 100;
+//   }
+
+::ng-deep {
+  .mat-form-field-wrapper {
+    padding: 0;
+    width: 100%;
   }
 
-  ::ng-deep {
-    .mat-form-field-wrapper {
-      padding: 0;
-    }
+  .mat-form-field-appearance-fill .mat-form-field-flex {
+    border-radius: 8px !important;
+    border: 1px solid #c7cadf;
+    background-color: white;
+  }
 
-    .mat-form-field-appearance-fill .mat-form-field-flex {
-      border-radius: 8px !important;
-      border: 1px solid #c7cadf;
-      background-color: white;
-    }
+  .mat-form-field-underline {
+    display: none;
+  }
 
-    .mat-form-field-underline {
-      display: none;
-    }
+  .mat-form-field-outline-start {
+    border-color: 0 !important;
+    border-width: 0px !important;
+  }
 
-    .mat-form-field-outline-start {
-      border-color: 0 !important;
-      border-width: 0px !important;
-    }
-
-    .mat-form-field-infix {
-      border-top: 0;
-    }
+  .mat-form-field-infix {
+    border-top: 0;
   }
 }

@@ -1,0 +1,9 @@
+<div class="grid w-full h-navScreen">
+  <app-box title="Logout" class="w-1/3 justify-self-center pt-20 mb-auto">
+    <h3 class="m-auto text-center">Are you sure you want to logout?</h3>
+    <div class="flex justify-center mt-4">
+      <button [routerLink]="['/user/my-account']" class="btn">Cancel</button>
+      <button (click)="onSubmit()" class="btn mainBtn">Log out</button>
+    </div>
+  </app-box>
+</div>

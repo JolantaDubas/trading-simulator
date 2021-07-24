@@ -1,13 +1,12 @@
-<div class="bg-primary-blue w-full h-20 flex justify-between px-8 items-center">
+<div class="bg-primary-blue h-20 flex px-8 items-center w-full justify-between">
   <div *ngIf="coins">
     <app-select
-      class="justify-self-start w-96"
+      class="justify-self-start w-64"
       placeholder="search"
       [options]="coins"
       [control]="coinControl"
     ></app-select>
   </div>
-
   <app-select
     *ngIf="vsCurrencies"
     class="justify-self-end w-24"

@@ -1,6 +1,6 @@
-import { LOCALE_ID, NgModule } from '@angular/core';
+import { DEFAULT_CURRENCY_CODE, LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -14,6 +14,10 @@ import { registerLocaleData } from '@angular/common';
 
 import { ToastrModule } from 'ngx-toastr';
 import { JwtModule } from '@auth0/angular-jwt';
+import { TokenInterceptor } from './core/auth/token.interceptor';
+import { StoreModule } from '@ngrx/store';
+import { allReducers } from './core/store/app.state';
+
 // Register the localization
 //registerLocaleData(localePt, 'fr-BE');
 
@@ -27,9 +31,17 @@ import { JwtModule } from '@auth0/angular-jwt';
     SharedModule,
     // JwtModule.forRoot({}),
     ToastrModule.forRoot(),
+    StoreModule.forRoot(allReducers),
   ],
   providers: [
+    { provide: DEFAULT_CURRENCY_CODE, useValue: 'EUR' },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true,
+    },
     HttpClientModule,
+
     // {
     //   provide: LOCALE_ID,
     //   useValue: 'fr-BE', // 'de-DE' for Germany, 'fr-FR' for France ...

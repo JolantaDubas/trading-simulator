@@ -1,0 +1,76 @@
+<div class="grid gap-4">
+  <app-box title="Trade" *ngIf="details">
+    <div class="grid grid-cols-2 gap-4">
+      <div clas="grid gap-4">
+        <h1
+          class="flex place-content-center w-full"
+          [ngClass]="type === 'buy' ? 'flex-row' : 'flex-row-reverse'"
+        >
+          <div>
+            <i class="fas fa-euro-sign h-8 mr-3"></i>{{ wallet[0].name }}
+            {{ wallet[0].symbol | uppercase }}
+          </div>
+          <div class="px-2">-></div>
+          <div class="flex">
+            <img class="h-9 w-9 mr-3" [src]="details?.image?.small" />
+            {{ details.name }} {{ details.symbol | uppercase }}
+          </div>
+        </h1>
+        <mat-slider
+          thumbLabel
+          style="color: blue; width: 100%"
+          [displayWith]="formatLabel"
+          [step]="sliderStep"
+          min="0"
+          [max]="sliderMax"
+          aria-label="units"
+          [value]="this.type === 'buy' ? buyPrice.value : amount.value"
+          (change)="setPrice($event.value)"
+        ></mat-slider>
+        <div
+          class="flex"
+          [ngClass]="type === 'buy' ? 'flex-row' : 'flex-row-reverse'"
+        >
+          <app-input
+            [label]="currency | uppercase"
+            type="number"
+            [control]="buyPrice"
+            class="w-full mx-2"
+          ></app-input>
+          <app-input
+            [label]="details.symbol | uppercase"
+            type="number"
+            [control]="amount"
+            class="w-full mx-2"
+          ></app-input>
+        </div>
+      </div>
+      <div class="grid">
+        <div>
+          <h4>
+            1 {{ details.symbol | uppercase }} = {{ currentPrice }}
+            {{ currency | uppercase }}
+          </h4>
+          <h4>
+            1 {{ currency | uppercase }} = {{ 1 / currentPrice }}
+            {{ details.symbol | uppercase }}
+          </h4>
+        </div>
+        <div>
+          <h3>Wallet:</h3>
+          <div *ngFor="let item of wallet">
+            {{ item.name }}: {{ item.amount }}
+          </div>
+        </div>
+      </div>
+      <div class="m-auto">
+        <a (click)="onSubmit()" class="btn mainBtn">{{ type | uppercase }}</a>
+      </div>
+    </div>
+  </app-box>
+  <app-trades
+    *ngIf="trades && coinChange"
+    [trades]="trades"
+    [coinChange]="coinChange"
+  ></app-trades>
+</div>

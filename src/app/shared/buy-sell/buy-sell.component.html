@@ -1,0 +1,15 @@
+<div class="grid grid-cols-2 w-20">
+  <a
+    [routerLink]="['/user/trade', coin, 'buy']"
+    class="smallBtn bg-primary-blue text-white p-2"
+  >
+    BUY
+  </a>
+  <a
+    *ngIf="isBought"
+    [routerLink]="['/user/trade', coin, 'sell']"
+    class="smallBtn bg-primary text-white p-2 ml-2"
+  >
+    SELL
+  </a>
+</div>

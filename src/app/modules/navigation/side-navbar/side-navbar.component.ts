@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { UserGuard } from 'src/app/core/guards/user.guard';
+import { AuthService } from 'src/app/core/auth/auth.service';
+import { UserGuard } from 'src/app/core/auth/user.guard';
 
 interface Link {
   title: string;
@@ -14,12 +15,16 @@ interface Link {
 })
 export class SideNavbarComponent implements OnInit {
   sharedLinks = [
-    { title: 'DASHBOARD', path: '', icon: 'fas fa-home' },
+    { title: 'DASHBOARD', path: '/', icon: 'fas fa-home' },
     { title: 'MARKET', path: '/market', icon: 'fas fa-coins' },
   ];
   loginUser = [
-    { title: 'MY ACCOUNT', path: '/user/my-account', icon: 'fas fa-key' },
-    { title: 'LOGOUT', path: '/logout', icon: 'fas fa-key' },
+    {
+      title: 'MY ACCOUNT',
+      path: '/user/my-account',
+      icon: 'fas fa-user-circle',
+    },
+    { title: 'LOGOUT', path: '/user/logout', icon: 'fas fa-power-off' },
   ];
   logoutUser = [
     { title: 'LOGIN/REGISTER', path: '/auth/login', icon: 'fas fa-key' },
@@ -29,16 +34,18 @@ export class SideNavbarComponent implements OnInit {
     //   icon: 'fas fa-clipboard-list',
     // },
   ];
-  constructor(public router: Router, public userGuard: UserGuard) {}
+  constructor(
+    public router: Router,
+    public userGuard: UserGuard,
+    public authService: AuthService
+  ) {}
 
   ngOnInit(): void {}
 
   getLinks(): Link[] {
-    const token = localStorage.getItem('Token');
-
-    if (!token) {
-      return [...this.sharedLinks, ...this.logoutUser];
-    } else return [...this.sharedLinks, ...this.loginUser];
+    if (this.authService.loggedIn()) {
+      return [...this.sharedLinks, ...this.loginUser];
+    } else return [...this.sharedLinks, ...this.logoutUser];
   }
 
   checkIfActive(linkPath): boolean {

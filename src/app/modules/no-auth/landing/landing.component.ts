@@ -4,6 +4,7 @@ import {
   ApexDataLabels,
   ApexLegend,
   ApexTheme,
+  ApexTooltip,
   ChartComponent,
 } from 'ng-apexcharts';
 
@@ -21,6 +22,7 @@ export type ChartOptions = {
   theme: ApexTheme;
   dataLabels: ApexDataLabels;
   legend: ApexLegend;
+  tooltip: ApexTooltip;
 };
 @Component({
   selector: 'app-landing',
@@ -73,6 +75,9 @@ export class LandingComponent implements OnInit {
   }
   setChartOptions() {
     this.chartOptions = {
+      tooltip: {
+        enabled: false,
+      },
       series: [
         //  20, 20, 20,
         Number(this.global?.data?.market_cap_percentage.btc.toFixed(2)),
@@ -82,7 +87,7 @@ export class LandingComponent implements OnInit {
           this.global?.data?.market_cap_percentage.eth,
       ],
       chart: {
-        type: 'donut',
+        type: 'pie',
       },
 
       theme: {
@@ -101,6 +106,7 @@ export class LandingComponent implements OnInit {
       legend: {
         show: false,
       },
+
       responsive: [
         {
           breakpoint: 480,

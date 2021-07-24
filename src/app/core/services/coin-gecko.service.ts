@@ -9,7 +9,7 @@ import { DataTablesParameters } from '../models/dataTablesParameters';
 export class CoinGeckoService {
   constructor(private http: HttpClient) {}
 
-  getCurrentPrice(ids: string[], vs_currencies: string[]) {
+  getCurrentPrice(ids: string | string[], vs_currencies: string) {
     return this.http.get('https://api.coingecko.com/api/v3/simple/price', {
       params: {
         ids: ids,
@@ -22,9 +22,12 @@ export class CoinGeckoService {
     return this.http.get('https://api.coingecko.com/api/v3/search/trending');
   }
 
-  getCoinData(id: string) {
-    return this.http.get('https://api.coingecko.com/api/v3/coins/' + id);
+  getCoinData(id: string, params?) {
+    return this.http.get('https://api.coingecko.com/api/v3/coins/' + id, {
+      params,
+    });
   }
+
   getMarketData(curr = 'usd', params?: DataTablesParameters) {
     return this.http.get('https://api.coingecko.com/api/v3/coins/markets/', {
       params: {

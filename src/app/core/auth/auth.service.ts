@@ -4,12 +4,13 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
   constructor(private http: HttpClient) {}
-
+  apiUrl = environment.apiUrl;
   // public isAuthenticated(): boolean {
   //   const token = localStorage.getItem('Token') || ''; // Check whether the token is expired and return
   //   // true or false
@@ -23,7 +24,7 @@ export class AuthService {
   }
 
   register(params) {
-    return this.http.post('http://localhost:3000/api/user/register', {
+    return this.http.post(`${this.apiUrl}user/register`, {
       username: params.name,
       email: params.email,
       password: params.password,
@@ -31,38 +32,14 @@ export class AuthService {
   }
 
   login(data) {
-    return this.http.post('http://localhost:3000/api/user/login', data);
-    // .pipe(
-    //   tap((res) => {
-    //     this.setLocalStorage(res);
-    //     this.router.navigate(['user/my-account']);
-    //   }),
-    //   catchError((err) => {
-    //     const { error } = err;
-
-    //     return new Observable((res) => {
-    //       let reqData = {};
-
-    //       if (err.status === 401) {
-    //         reqData = {
-    //           message: error.message,
-    //           status: error.status,
-    //           token: error.token,
-    //         };
-    //       } else {
-    //         reqData = {
-    //           message: err.statusText,
-    //           status: err.status,
-    //           token: '',
-    //         };
-    //       }
-    //       res.next(reqData);
-    //     });
-    //   })
-    //  );
+    return this.http.post(`${this.apiUrl}user/login`, data);
   }
 
   loggedIn() {
     return !!localStorage.getItem('Token');
+  }
+
+  public getToken(): string {
+    return localStorage.getItem('Token');
   }
 }

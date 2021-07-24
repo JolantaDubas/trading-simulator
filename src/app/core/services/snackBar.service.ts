@@ -8,19 +8,19 @@ import { ToastrService } from 'ngx-toastr';
 export class SnackBarService {
   constructor(private toastr: ToastrService) {}
 
-  showSuccess(message, title) {
+  showSuccess(message, title?) {
     this.toastr.success(message);
   }
 
-  showError(message, title) {
+  showError(message, title?) {
     this.toastr.error(message);
   }
 
-  showInfo(message, title) {
+  showInfo(message, title?) {
     this.toastr.info(message);
   }
 
-  showWarning(message, title) {
+  showWarning(message, title?) {
     this.toastr.warning(message);
   }
 }
