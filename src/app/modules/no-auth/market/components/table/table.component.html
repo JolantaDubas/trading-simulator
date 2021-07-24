@@ -52,10 +52,7 @@
             [currency]="currency"
           ></app-sparkline>
         </td>
-        <!--  <td>{{ item.price_change_percentage_30d_in_currency | number }}</td>
-          <td>{{ item.price_change_percentage_1y_in_currency | number }}</td>
-          <td>{{ item.price_change_percentage_1y_in_currency | number }}</td>
-          <td>{{ item.price_change_percentage_1y_in_currency | number }}</td> -->
+
         <th *ngIf="loggedIn && wallet">
           <app-buy-sell [coin]="item.id"></app-buy-sell>
         </th>

@@ -15,7 +15,7 @@ export class TradesComponent implements OnInit {
     this.dtOptions = {
       // info: false,
       paging: false,
-      scrollY: 'auto',
+      responsive: true,
     };
   }
 

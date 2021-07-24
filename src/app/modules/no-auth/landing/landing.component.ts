@@ -50,12 +50,11 @@ export class LandingComponent implements OnInit {
     this.dtOptions = {
       info: false,
       paging: false,
-      scrollY: 'auto',
+      responsive: true,
     };
     this.dtOptionsTrending = {
       info: false,
       paging: false,
-      scrollY: 'auto',
       ordering: false,
       searching: false,
     };

@@ -1,7 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
 
-import { AppState } from 'src/app/core/store/app.state';
-import { Store } from '@ngrx/store';
 import { UserService } from 'src/app/core/services/user.service';
 import { TradeService } from 'src/app/core/services/trade.service';
 import { ResponseModel } from 'src/app/core/models/responseModel';
@@ -29,7 +27,6 @@ export class MyAccountComponent implements OnInit {
   coinChange: number[];
   coinValues: number[];
 
-  dtOptions: DataTables.Settings;
   public chartOptions: Partial<ChartOptions>;
 
   constructor(
@@ -41,12 +38,6 @@ export class MyAccountComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.dtOptions = {
-      // info: false,
-      paging: false,
-      scrollY: 'auto',
-    };
-
     this.userService.getProfile().subscribe((res: ResponseModel) => {
       this.profile = res.data;
     });
@@ -91,7 +82,7 @@ export class MyAccountComponent implements OnInit {
         );
 
         this.coinValues = this.wallet.map((item) =>
-          item.name === 'eur'
+          item.key === 'eur'
             ? +item.amount
             : item.amount * this.capitalChange[item.key][this.currency]
         );
@@ -124,16 +115,12 @@ export class MyAccountComponent implements OnInit {
       legend: {
         show: false,
       },
-
       responsive: [
         {
           breakpoint: 480,
           options: {
             chart: {
               width: 100,
-            },
-            legend: {
-              position: 'bottom',
             },
           },
         },

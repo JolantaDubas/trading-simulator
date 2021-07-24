@@ -4,7 +4,7 @@
     <h4>{{ profile.account }}</h4>
   </app-box> -->
   <app-box title="My wallet" *ngIf="wallet && coinChange">
-    <div class="grid grid-cols-2 gap-8">
+    <div class="grid lg:grid-cols-2 gap-8">
       <div>
         <div class="flex">
           <h3 class="pr-4">Total Capital: {{ totalCapital | currency }}</h3>
@@ -15,7 +15,7 @@
         </div>
         <div *ngFor="let item of wallet">
           <div
-            class="grid grid-cols-2 h-10 items-center"
+            class="grid lg:grid-cols-2 h-14 lg:h-10 items-center"
             *ngIf="!coin || coin === item.key || item.key === 'eur'"
           >
             <h4
@@ -29,7 +29,7 @@
               *ngIf="item.key !== 'eur' && capitalChange"
               class="grid grid-cols-2"
             >
-              <p class="pr-4 justify-self-end">
+              <p class="pr-4 lg:justify-self-end">
                 (
                 {{ item.amount * capitalChange[item.key][currency] | currency }}
                 )
@@ -51,11 +51,10 @@
       </div>
     </div>
   </app-box>
-  <app-trades
-    *ngIf="trades && coinChange"
-    [trades]="trades"
-    [coinChange]="coinChange"
-  ></app-trades>
+  <app-box title="Trades history" *ngIf="trades.length">
+    <app-trades [trades]="trades" [coinChange]="coinChange"></app-trades>
+  </app-box>
+
   <!-- <app-box title="Trades" *ngIf="trades">
     <div>
       <table

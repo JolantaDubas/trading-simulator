@@ -1,8 +1,22 @@
 module.exports = {
   purge: ["./src/**/*.{html,ts}"],
-  mode: "jit",
-
   theme: {
+    fontSize: {
+      xs: ".75rem",
+      sm: ".875rem",
+      base: "1rem",
+      lg: "1.125rem",
+      xl: "1.25rem",
+      "2xl": "1.5rem",
+      "3xl": "1.875rem",
+    },
+    fontWeight: {
+      normal: 400,
+      semibold: 600,
+    },
+    borderRadius: {
+      lg: "0.5rem",
+    },
     screens: {
       sm: "480px",
       md: "768px",

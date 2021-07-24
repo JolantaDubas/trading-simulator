@@ -1,12 +1,28 @@
-<div class="w-full h-full bg-white shadow-xl py-9 px-8">
-  <div class="fixed grid gap-6">
+<div class="h-20 lg:h-full w-full bg-white shadow-xl" style="min-width: 200px">
+  <div
+    class="
+      w-full
+      py-6
+      lg:py-9
+      px-8
+      fixed
+      flex
+      lg:grid
+      gap-6
+      lg:w-max
+      justify-evenly
+      lg:justify-start
+      bg-white
+      z-20
+    "
+  >
     <div *ngFor="let link of getLinks()">
       <a
         [routerLink]="link.path"
         [ngClass]="checkIfActive(link.path) ? 'text-primary' : 'text-gray-500'"
       >
         <i class="mr-3" class="{{ link.icon }}"></i>
-        {{ link.title }}
+        <span class="hidden md:inline-block">{{ link.title }}</span>
       </a>
     </div>
   </div>

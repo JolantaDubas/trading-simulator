@@ -54,6 +54,7 @@ export class TableComponent implements OnInit {
       searching: false,
       ordering: true,
       order: [[3, 'desc']],
+      //scrollX: '100%',
       scrollY: 'calc(100vh - 300px)',
       responsive: true,
       ajax: (dataTablesParameters: DataTablesParameters, callback) => {
