@@ -28,14 +28,12 @@ export class TableComponent implements OnInit {
     private capitalService: CapitalService
   ) {
     console.log('dtOptions', this.dtOptions);
-    this.capitalService.getCapitals().subscribe((res: ResponseModel) => {
-      this.wallet = res.data;
-      console.log('table', this.wallet);
-    });
+    this.loggedIn = this.authService.loggedIn();
   }
 
   ngOnInit(): void {
-    this.loggedIn = this.authService.loggedIn();
+    console.log('loggedIn', this.loggedIn);
+
     this.dtOptions = {
       columns: [
         { data: 'id' },
@@ -78,6 +76,13 @@ export class TableComponent implements OnInit {
       ...this.dtOptions,
     };
     console.log('dtOptions', this.dtOptions);
+
+    if (this.loggedIn) {
+      this.capitalService.getCapitals().subscribe((res: ResponseModel) => {
+        this.wallet = res.data;
+        console.log('table', this.wallet);
+      });
+    }
   }
 
   checkIfNull(value): string | number {

@@ -2,7 +2,7 @@
   <table
     datatable
     [dtOptions]="dtOptions"
-    class="row-border order-column hover w-full"
+    class="row-border order-column hover"
   >
     <thead class="w-full">
       <tr>
@@ -13,7 +13,7 @@
         <th>ATH</th>
         <th>Volume</th>
         <th class="w-32">Last 7 days (USD)</th>
-        <th *ngIf="loggedIn">Actions</th>
+        <th [ngClass]="loggedIn ? '' : 'hidden'">Actions</th>
       </tr>
     </thead>
     <tbody *ngIf="resultsLength != 0">
@@ -53,8 +53,10 @@
           ></app-sparkline>
         </td>
 
-        <th *ngIf="loggedIn && wallet">
-          <app-buy-sell [coin]="item.id"></app-buy-sell>
+        <th>
+          <div *ngIf="loggedIn && wallet">
+            <app-buy-sell [coin]="item.id"></app-buy-sell>
+          </div>
         </th>
       </tr>
     </tbody>

@@ -1,5 +1,8 @@
 <div class="w-full h-navScreen grid">
-  <app-box title="Register" class="w-1/2 justify-self-center pt-20 mb-auto">
+  <app-box
+    title="Register"
+    class="w-1/2 min-w-min justify-self-center pt-20 mb-auto"
+  >
     <form [formGroup]="form" (ngSubmit)="onSubmit()" class="grid gap-4">
       <app-input label="Name" [control]="name"></app-input>
       <app-input label="Email" [control]="email"></app-input>

@@ -3,7 +3,7 @@
     <p>Your account saldo:</p>
     <h4>{{ profile.account }}</h4>
   </app-box> -->
-  <app-box title="My wallet" *ngIf="wallet && coinChange">
+  <app-box title="My wallet" *ngIf="wallet && totalCapital">
     <div class="grid lg:grid-cols-2 gap-8">
       <div>
         <div class="flex">
@@ -51,9 +51,7 @@
       </div>
     </div>
   </app-box>
-  <app-box title="Trades history" *ngIf="trades.length">
-    <app-trades [trades]="trades" [coinChange]="coinChange"></app-trades>
-  </app-box>
+  <app-trades [trades]="trades" [coinChange]="coinChange"></app-trades>
 
   <!-- <app-box title="Trades" *ngIf="trades">
     <div>

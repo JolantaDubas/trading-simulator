@@ -49,7 +49,7 @@ export class TradeComponent implements OnInit {
     this.type = this.route.snapshot.paramMap.get('type') as 'buy' | 'sell';
 
     this.form = this.fb.group({
-      amount: [, [number(), required(), maxValue(20, 'to big')]],
+      amount: [, [number(), required()]],
       buyPrice: [, [number(), required()]],
     });
     if (this.type !== 'buy' && this.type !== 'sell') {

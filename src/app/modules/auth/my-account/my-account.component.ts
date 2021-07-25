@@ -68,12 +68,12 @@ export class MyAccountComponent implements OnInit {
       .subscribe((res) => {
         this.capitalChange = res;
 
-        this.totalCapital = this.trades.reduce((sum, trade) => {
-          console.log('trade', trade, this.capitalChange);
-          return (
-            sum + trade.amount * this.capitalChange[trade.key][this.currency]
-          );
-        }, +this.wallet[0].amount);
+        // this.totalCapital = this.trades.reduce((sum, trade) => {
+        //   console.log('trade', trade, this.capitalChange);
+        //   return (
+        //     sum + trade.amount * this.capitalChange[trade.key][this.currency]
+        //   );
+        // }, +this.wallet[0].amount);
 
         this.coinChange = this.trades.map(
           (trade) =>
@@ -81,11 +81,16 @@ export class MyAccountComponent implements OnInit {
             trade.amount * trade.price
         );
 
-        this.coinValues = this.wallet.map((item) =>
+        console.log('coinChange', this.coinChange);
+        console.log('coinValues', this.coinValues);
+
+        this.coinValues = this.wallet.map((item, index) =>
           item.key === 'eur'
             ? +item.amount
             : item.amount * this.capitalChange[item.key][this.currency]
         );
+
+        this.totalCapital = this.coinValues.reduce((a, b) => a + b, 0);
         this.setChartOptions();
       });
   }
