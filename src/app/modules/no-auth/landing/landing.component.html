@@ -44,7 +44,10 @@
       <app-box class="z-10" title="Market Capitalization">
         <app-diagrams id="market_cap"></app-diagrams>
       </app-box>
-      <div class="grid gap-4 justify-between">
+      <div
+        class="grid gap-4 justify-between"
+        style="grid-template-columns: 3fr 1fr"
+      >
         <app-box title="Market" showBtn="true" link="/market" class="z-10">
           <app-table [dtOptions]="dtOptions" [currency]="currency"></app-table
         ></app-box>

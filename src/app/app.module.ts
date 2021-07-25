@@ -9,11 +9,7 @@ import { SharedModule } from './shared/shared.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TopBarComponent } from './modules/navigation/top-bar/top-bar.component';
 
-import localePt from '@angular/common/locales/fr-BE';
-import { registerLocaleData } from '@angular/common';
-
 import { ToastrModule } from 'ngx-toastr';
-import { JwtModule } from '@auth0/angular-jwt';
 import { TokenInterceptor } from './core/auth/token.interceptor';
 import { StoreModule } from '@ngrx/store';
 import { allReducers } from './core/store/app.state';
