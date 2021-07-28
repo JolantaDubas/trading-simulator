@@ -84,7 +84,7 @@ export class MyAccountComponent implements OnInit {
         console.log('coinChange', this.coinChange);
         console.log('coinValues', this.coinValues);
 
-        this.coinValues = this.wallet.map((item, index) =>
+        this.coinValues = this.wallet?.map((item, index) =>
           item.key === 'eur'
             ? +item.amount
             : item.amount * this.capitalChange[item.key][this.currency]
