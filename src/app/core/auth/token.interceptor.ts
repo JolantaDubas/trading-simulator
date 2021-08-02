@@ -19,7 +19,7 @@ interface DecodedToken {
   unique_name: string;
 }
 @Injectable()
-export class TokenInterceptor implements HttpInterceptor {
+export class TokenInterceptor {
   constructor(public auth: AuthService) {}
   intercept(
     request: HttpRequest<any>,

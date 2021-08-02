@@ -10,9 +10,10 @@
         <tr>
           <th>Type</th>
           <th>Coin</th>
-          <th>Amount</th>
-          <th>Price when bought</th>
+          <th>Amount bought/sell</th>
           <th>Amount paid</th>
+          <th>Price when bought/sell</th>
+          <th>Current price</th>
           <th>Change</th>
           <th>Date</th>
         </tr>
@@ -22,32 +23,42 @@
           <td [ngClass]="trade.buy ? 'text-primary-blue' : 'text-primary'">
             {{ trade.buy ? "BUY" : "SELL" }}
           </td>
-          <td
-            [routerLink]="['/key', trade.key]"
-            class="cursor-pointer font-semibold"
-          >
-            {{ trade.coin }}
+          <td>
+            <a
+              [routerLink]="['/coin', trade.key]"
+              class="cursor-pointer font-semibold"
+            >
+              {{ trade.coin }}</a
+            >
           </td>
           <td>
-            {{ trade.amount }}
-          </td>
-          <td>
-            {{ trade.price | currency }}
+            {{ trade.amount | shortNumber }}
           </td>
           <td>
             {{ trade.amount * trade.price | currency }}
           </td>
           <td>
+            {{ trade.price | currency }}
+          </td>
+          <td>
+            {{ capitalChange[trade.key].eur | currency }}
+          </td>
+
+          <td class="min-w-max">
+            <!-- {{ trade.amount * capitalChange[trade.key].eur }} -->
             <app-price-change
-              *ngIf="coinChange"
-              [valueChange]="coinChange[i]"
+              [valueChange]="
+                trade.amount * (capitalChange[trade.key].eur - trade.price)
+              "
               [percentChange]="
-                (coinChange[i] / (trade.amount * trade.price)) * 100
+                ((trade.amount * (capitalChange[trade.key].eur - trade.price)) /
+                  (trade.amount * trade.price)) *
+                100
               "
             ></app-price-change>
           </td>
-          <td>
-            {{ trade.date }}
+          <td class="w-28">
+            {{ trade.date | date: "medium" }}
           </td>
         </tr>
       </tbody>

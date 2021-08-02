@@ -19,6 +19,12 @@ export class TopBarComponent implements OnInit {
   constructor(private cgListsService: CgListsService, private router: Router) {}
 
   ngOnInit(): void {
+    console.log('vs_currency', this.vsCurrencyControl.value);
+    if (!this.vsCurrencyControl.value) {
+      this.vsCurrencyControl.setValue('EUR');
+      localStorage.setItem('vs_currency', this.vsCurrencyControl.value);
+      window.location.reload();
+    }
     this.cgListsService.getVsCurrencies().subscribe((res: string[]) => {
       this.vsCurrencies = res.map((item) => item.toUpperCase());
     });
@@ -32,6 +38,8 @@ export class TopBarComponent implements OnInit {
     this.vsCurrencyControl.valueChanges
       .pipe(debounceTime(300))
       .subscribe((data) => {
+        console.log('vs_currency', this.vsCurrencyControl.value);
+
         if (this.vsCurrencies.includes(data)) {
           localStorage.setItem('vs_currency', this.vsCurrencyControl.value);
           window.location.reload();

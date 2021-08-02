@@ -8,8 +8,9 @@ import { TradeItem } from 'src/app/core/models/tradeItem';
 })
 export class TradesComponent implements OnInit {
   @Input() trades: TradeItem[];
-  @Input() coinChange: number[];
+  @Input() capitalChange: number[][];
   dtOptions: DataTables.Settings;
+  @Input() coinChange: number[];
 
   constructor() {
     this.dtOptions = {
@@ -19,5 +20,12 @@ export class TradesComponent implements OnInit {
     };
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log('capitalChange', this.capitalChange);
+    this.coinChange = this.trades.map(
+      (trade) =>
+        trade.amount * this.capitalChange[trade.key]['eur'] -
+        trade.amount * trade.price
+    );
+  }
 }

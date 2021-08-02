@@ -51,62 +51,9 @@
       </div>
     </div>
   </app-box>
-  <app-trades [trades]="trades" [coinChange]="coinChange"></app-trades>
-
-  <!-- <app-box title="Trades" *ngIf="trades">
-    <div>
-      <table
-        datatable
-        class="w-full"
-        [dtOptions]="dtOptions"
-        class="row-border order-column hover w-full"
-      >
-        <thead class="w-full">
-          <tr>
-            <th>Type</th>
-            <th>Coin</th>
-            <th>Amount</th>
-            <th>Price when bought</th>
-            <th>Amount paid</th>
-            <th>Change</th>
-            <th>Date</th>
-          </tr>
-        </thead>
-        <tbody class="w-full">
-          <tr *ngFor="let trade of trades; let i = index">
-            <td [ngClass]="trade.buy ? 'text-primary-blue' : 'text-primary'">
-              {{ trade.buy ? "BUY" : "SELL" }}
-            </td>
-            <td
-              [routerLink]="['/key', trade.key]"
-              class="cursor-pointer font-semibold"
-            >
-              {{ trade.coin }}
-            </td>
-            <td>
-              {{ trade.amount }}
-            </td>
-            <td>
-              {{ trade.price | currency }}
-            </td>
-            <td>
-              {{ trade.amount * trade.price | currency }}
-            </td>
-            <td>
-              <app-price-change
-                *ngIf="coinChange"
-                [valueChange]="coinChange[i]"
-                [percentChange]="
-                  (coinChange[i] / (trade.amount * trade.price)) * 100
-                "
-              ></app-price-change>
-            </td>
-            <td>
-              {{ trade.date }}
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </app-box> -->
+  <app-trades
+    *ngIf="trades?.length && capitalChange"
+    [trades]="trades"
+    [capitalChange]="capitalChange"
+  ></app-trades>
 </div>

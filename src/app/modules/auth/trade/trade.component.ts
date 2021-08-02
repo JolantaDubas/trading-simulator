@@ -26,7 +26,7 @@ import { number } from 'src/app/core/validators/number';
 export class TradeComponent implements OnInit {
   form: FormGroup;
   trades: TradeItem[];
-  coinChange: number[];
+  capitalChange: object;
 
   currency = 'eur';
   coin: string;
