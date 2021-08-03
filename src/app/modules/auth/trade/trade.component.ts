@@ -159,22 +159,22 @@ export class TradeComponent implements OnInit {
       .getTrades({ byCoin: this.details.id })
       .subscribe((res: ResponseModel) => {
         this.trades = res.data;
-        this.getCurrentChange();
+        // this.getCurrentChange();
       });
   }
 
-  getCurrentChange() {
-    const coins = this.wallet.map((item) => item.key).join(',');
-    this.coinGeckoService
-      .getCurrentPrice(coins, this.currency)
-      .subscribe((res) => {
-        this.coinChange = this.trades.map(
-          (trade) =>
-            trade.amount * res[trade.key][this.currency] -
-            trade.amount * trade.price
-        );
-      });
-  }
+  // getCurrentChange() {
+  //   const coins = this.wallet.map((item) => item.key).join(',');
+  //   this.coinGeckoService
+  //     .getCurrentPrice(coins, this.currency)
+  //     .subscribe((res) => {
+  //       this.coinChange = this.trades.map(
+  //         (trade) =>
+  //           trade.amount * res[trade.key][this.currency] -
+  //           trade.amount * trade.price
+  //       );
+  //     });
+  // }
 
   get amount(): FormControl {
     return this.form.get('amount') as FormControl;
