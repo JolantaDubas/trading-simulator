@@ -51,6 +51,7 @@ export class LandingComponent implements OnInit {
       info: false,
       paging: false,
       responsive: true,
+      scrollY: 'auto',
     };
     this.dtOptionsTrending = {
       info: false,
@@ -62,7 +63,6 @@ export class LandingComponent implements OnInit {
       .getGlobal()
       .subscribe((res: { coins: any[]; exchanges: any[] }) => {
         this.global = res;
-        console.log('global', this.global);
         this.setChartOptions();
       });
 

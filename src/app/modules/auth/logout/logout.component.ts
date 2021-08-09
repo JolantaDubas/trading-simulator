@@ -12,7 +12,6 @@ export class LogoutComponent implements OnInit {
 
   ngOnInit(): void {}
   onSubmit() {
-    console.log('onsubmit');
     localStorage.removeItem('Token');
     this.snackBar.showSuccess('You have been logout successfully');
     this.router.navigate(['/']);

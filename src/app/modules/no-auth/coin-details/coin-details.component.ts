@@ -26,7 +26,6 @@ export class CoinDetailsComponent implements OnInit {
     this.coinGeckoService.getCoinData(this.id).subscribe(
       (res: { coins: any[]; exchanges: any[] }) => {
         this.details = res;
-        console.log(this.details);
         this.loading = false;
       },
       (err) => console.log(err)

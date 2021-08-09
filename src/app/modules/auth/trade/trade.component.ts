@@ -26,7 +26,6 @@ import { number } from 'src/app/core/validators/number';
 export class TradeComponent implements OnInit {
   form: FormGroup;
   trades: TradeItem[];
-  capitalChange: object;
 
   currency = 'eur';
   coin: string;
@@ -36,6 +35,7 @@ export class TradeComponent implements OnInit {
   details: any;
   sliderMax: number;
   sliderStep: number;
+  capitalChange: object;
   constructor(
     private route: ActivatedRoute,
     private tradeService: TradeService,
@@ -49,8 +49,8 @@ export class TradeComponent implements OnInit {
     this.type = this.route.snapshot.paramMap.get('type') as 'buy' | 'sell';
 
     this.form = this.fb.group({
-      amount: [, [number(), required()]],
-      buyPrice: [, [number(), required()]],
+      amount: [0, [number(), required()]],
+      buyPrice: [0, [number(), required()]],
     });
     if (this.type !== 'buy' && this.type !== 'sell') {
       this.router.navigate(['user/my-account']);
@@ -62,6 +62,7 @@ export class TradeComponent implements OnInit {
       .getCurrentPrice(this.coin, this.currency)
       .subscribe((res) => {
         this.currentPrice = res[this.coin][this.currency];
+        this.capitalChange = res;
       });
     // setTimeout(() => {
     //   this.coinGeckoService
@@ -91,7 +92,6 @@ export class TradeComponent implements OnInit {
       .subscribe(
         (res: { coins: any[]; exchanges: any[] }) => {
           this.details = res;
-          console.log(this.details);
           this.getWallet();
         },
         (err) => console.log(err)
@@ -106,13 +106,10 @@ export class TradeComponent implements OnInit {
     if (value >= 1000) {
       return Math.round(value / 1000) + 'k';
     }
-    // this.buyPrice.setValue(value);
-    console.log('value', value);
     return value;
   }
 
   onSubmit() {
-    console.log('this.form.valid', this.form.valid);
     if (this.form.valid)
       this.tradeService
         .createTrade({
@@ -137,44 +134,29 @@ export class TradeComponent implements OnInit {
       .getCapitals({ byCoin: this.details.id })
       .subscribe((res: ResponseModel) => {
         this.wallet = res.data;
-
+        console.log('wallet', this.wallet);
         if (this.type === 'buy') {
           this.sliderMax = this.wallet[0].amount;
           this.buyPrice.setValidators(
-            maxValue(this.sliderMax, 'number is bigger than your capital')
+            maxValue(this.sliderMax, 'Number is bigger than your capital.')
           );
           this.buyPrice.updateValueAndValidity();
         } else {
           this.sliderMax = this.wallet[1].amount;
 
           this.amount.setValidators(
-            maxValue(this.sliderMax, 'number is bigger than your capital')
+            maxValue(this.sliderMax, 'Number is bigger than your capital.')
           );
           this.amount.updateValueAndValidity();
         }
         if (this.sliderMax < 100) this.sliderStep = 0.001;
-        console.log('slidermax', this.sliderMax, this.sliderStep);
       });
     this.tradeService
       .getTrades({ byCoin: this.details.id })
       .subscribe((res: ResponseModel) => {
         this.trades = res.data;
-        // this.getCurrentChange();
       });
   }
-
-  // getCurrentChange() {
-  //   const coins = this.wallet.map((item) => item.key).join(',');
-  //   this.coinGeckoService
-  //     .getCurrentPrice(coins, this.currency)
-  //     .subscribe((res) => {
-  //       this.coinChange = this.trades.map(
-  //         (trade) =>
-  //           trade.amount * res[trade.key][this.currency] -
-  //           trade.amount * trade.price
-  //       );
-  //     });
-  // }
 
   get amount(): FormControl {
     return this.form.get('amount') as FormControl;

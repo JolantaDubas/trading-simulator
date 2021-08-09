@@ -27,13 +27,11 @@ export class TableComponent implements OnInit {
     public authService: AuthService,
     private capitalService: CapitalService
   ) {
-    console.log('dtOptions', this.dtOptions);
     this.loggedIn = this.authService.loggedIn();
   }
 
   ngOnInit(): void {
-    console.log('loggedIn', this.loggedIn);
-
+    const currencyLength = localStorage.getItem('activeCurrencies');
     this.dtOptions = {
       columns: [
         { data: 'id' },
@@ -47,7 +45,9 @@ export class TableComponent implements OnInit {
       ],
       pagingType: 'full_numbers',
       pageLength: 25,
+      lengthMenu: [10, 25, 50],
       serverSide: true,
+      pending: true,
       processing: true,
       searching: false,
       ordering: true,
@@ -56,7 +56,6 @@ export class TableComponent implements OnInit {
       scrollY: 'calc(100vh - 300px)',
       responsive: true,
       ajax: (dataTablesParameters: DataTablesParameters, callback) => {
-        console.log('dataTablesParameters', dataTablesParameters);
         this.coinGeckoService
           .getMarketData(this.currency, dataTablesParameters)
           .subscribe(
@@ -64,8 +63,8 @@ export class TableComponent implements OnInit {
               this.market = res;
               this.resultsLength = this.market.length;
               callback({
-                recordsTotal: 7459,
-                recordsFiltered: 7459,
+                recordsTotal: currencyLength,
+                recordsFiltered: currencyLength,
                 lengthChange: true,
                 data: [],
               });
@@ -75,12 +74,10 @@ export class TableComponent implements OnInit {
       },
       ...this.dtOptions,
     };
-    console.log('dtOptions', this.dtOptions);
 
     if (this.loggedIn) {
       this.capitalService.getCapitals().subscribe((res: ResponseModel) => {
         this.wallet = res.data;
-        console.log('table', this.wallet);
       });
     }
   }

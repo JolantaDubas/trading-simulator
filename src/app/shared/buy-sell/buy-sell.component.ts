@@ -13,12 +13,11 @@ import { ResponseModel } from '../../core/models/responseModel';
 })
 export class BuySellComponent implements OnInit {
   @Input() coin: any;
-  wallet: CapitalItem[];
+  @Input() wallet?: CapitalItem[];
   isBought: boolean;
   constructor(private capitalService: CapitalService) {}
 
   ngOnInit(): void {
-    console.log('input wallet', this.wallet);
     if (!this.wallet) {
       this.capitalService.getCapitals().subscribe((res: ResponseModel) => {
         this.wallet = res.data;

@@ -20,9 +20,7 @@ export class InputComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
-    this.control.valueChanges.subscribe((value) => {
-      console.log('value', this.control);
-    });
+    this.control.valueChanges.subscribe((value) => {});
     if (this.type === 'password') this.hide = true;
   }
 }

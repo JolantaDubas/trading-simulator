@@ -7,7 +7,6 @@ import { CapitalItem } from 'src/app/core/models/capitalItem';
 import { TradeItem } from 'src/app/core/models/tradeItem';
 import { User } from 'src/app/core/models/user';
 import { CapitalService } from 'src/app/core/services/capital.service';
-import { SnackBarService } from 'src/app/core/services/snackBar.service';
 import { CoinGeckoService } from 'src/app/core/services/coin-gecko.service';
 import { ChartOptions } from '../../no-auth/landing/landing.component';
 @Component({
@@ -32,7 +31,6 @@ export class MyAccountComponent implements OnInit {
   constructor(
     private userService: UserService,
     private capitalService: CapitalService,
-    private snackBar: SnackBarService,
     private coinGeckoService: CoinGeckoService,
     private tradeService: TradeService
   ) {}
@@ -50,14 +48,6 @@ export class MyAccountComponent implements OnInit {
 
           this.getCurrentChange();
         });
-
-      // if (this.wallet.length < 1) {
-      //   this.capitalService
-      //     .createCapital({ currency: this.currency, amount: 100000 })
-      //     .subscribe((res: ResponseModel) => {
-      //       this.snackBar.showSuccess(res.message);
-      //     });
-      // }
     });
   }
 
@@ -67,13 +57,6 @@ export class MyAccountComponent implements OnInit {
       .getCurrentPrice(coins, this.currency)
       .subscribe((res) => {
         this.capitalChange = res;
-
-        // this.totalCapital = this.trades.reduce((sum, trade) => {
-        //   console.log('trade', trade, this.capitalChange);
-        //   return (
-        //     sum + trade.amount * this.capitalChange[trade.key][this.currency]
-        //   );
-        // }, +this.wallet[0].amount);
 
         this.coinValues = this.wallet?.map((item, index) =>
           item.key === 'eur'
@@ -87,8 +70,6 @@ export class MyAccountComponent implements OnInit {
   }
 
   setChartOptions() {
-    console.log('coinValues', this.coinValues);
-
     this.chartOptions = {
       tooltip: {
         enabled: false,

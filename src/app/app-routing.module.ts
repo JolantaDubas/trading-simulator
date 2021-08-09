@@ -4,11 +4,6 @@ import { UserGuard } from './core/auth/user.guard';
 
 const routes: Routes = [
   {
-    path: 'shared',
-    loadChildren: () =>
-      import('./shared/shared.module').then((m) => m.SharedModule),
-  },
-  {
     path: 'user',
     loadChildren: () =>
       import('./modules/auth/auth.module').then((m) => m.AuthModule),

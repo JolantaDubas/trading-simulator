@@ -22,7 +22,6 @@ export class WalletComponent implements OnInit {
     if (!this.wallet) {
       this.capitalService.getCapitals().subscribe((res: ResponseModel) => {
         this.wallet = res.data;
-        console.log(this.wallet);
         this.getCurrentChange();
       });
     } else {
@@ -35,7 +34,6 @@ export class WalletComponent implements OnInit {
       .getCurrentPrice(coins, this.currency)
       .subscribe((res) => {
         this.change = res;
-        console.log('change', this.change);
       });
   }
 }

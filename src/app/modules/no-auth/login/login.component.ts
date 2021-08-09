@@ -40,13 +40,10 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log('submit', this.form);
     this.authService
       .login(this.form.value)
       .pipe(
         catchError((error: HttpErrorResponse) => {
-          console.log('register', error);
-
           if (error.error.status === 401) {
             this.snackBar.showWarning(error.error.message);
           } else this.snackBar.showError(error.error.message);
@@ -54,7 +51,6 @@ export class LoginComponent implements OnInit {
         })
       )
       .subscribe((res: ResponseModel) => {
-        console.log(res);
         localStorage.setItem('Token', res.token);
         this.getProfile();
         this.snackBar.showSuccess(res.message);

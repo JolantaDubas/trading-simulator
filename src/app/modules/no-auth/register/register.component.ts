@@ -34,13 +34,10 @@ export class RegisterComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log('submit', this.form);
     this.authService
       .register(this.form.value)
       .pipe(
         catchError((error: HttpErrorResponse) => {
-          console.log('register', error);
-
           if (error.error.status === 401) {
             this.snackBar.showWarning(error.error.message, 'info');
           } else this.snackBar.showError(error.error.message, 'error');
@@ -48,8 +45,6 @@ export class RegisterComponent implements OnInit {
         })
       )
       .subscribe((res: ResponseModel) => {
-        console.log('register', res);
-
         this.snackBar.showSuccess(res.message, 'success');
         this.router.navigate(['auth/login']);
       });

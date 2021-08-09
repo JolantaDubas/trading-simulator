@@ -55,7 +55,7 @@
 
         <th>
           <div *ngIf="loggedIn && wallet">
-            <app-buy-sell [coin]="item.id"></app-buy-sell>
+            <app-buy-sell [coin]="item.id" [wallet]="wallet"></app-buy-sell>
           </div>
         </th>
       </tr>

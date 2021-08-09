@@ -41,61 +41,18 @@ export class SparklineComponent implements OnInit {
     },
     tooltip: {
       enabled: false,
-      // fixed: {
-      //   enabled: false,
-      // },
-      // x: {
-      //   show: false,
-      // },
-
-      // marker: {
-      //   show: false,
-      // },
-      // shared: true,
-      // intersect: false,
-      // y: [
-      //   {
-      //     formatter: function (y) {
-      //       if (typeof y !== 'undefined') {
-      //         return y.toLocaleString();
-      //       }
-      //       return y;
-      //     },
-      //   },
-      // ],
     },
     stroke: {
       width: 2,
     },
   };
-  constructor() {
-    // window.Apex = {
-    //   stroke: {
-    //     width: 2,
-    //   },
-    //   tooltip: {
-    //     fixed: {
-    //       enabled: true,
-    //     },
-    //   },
-    // };
-  }
+  constructor() {}
 
   ngOnInit(): void {
     let div: number;
     let filtered = [];
     if (this.data.length > 10) {
       div = Math.round(this.data.length / 10);
-
-      // for (let i = 0, j = 0; i < this.data.length; i++) {
-      //   if (i % div === 0) {
-      //     filtered[j] = this.data[i];
-      //     j++;
-      //   }
-
-      //   // filtered = this.data[i].
-      //   // console.log ("Block statement execution no." + i);
-      // }
 
       filtered = this.data.filter((a, i) => i % div === 0);
     } else filtered = this.data;

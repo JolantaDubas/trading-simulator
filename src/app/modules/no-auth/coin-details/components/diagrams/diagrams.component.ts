@@ -69,10 +69,8 @@ export class DiagramsComponent implements OnInit {
           currency: this.currency,
         })
         .subscribe((res: any[]) => {
-          console.log('market_cap', res);
           this.fullData = res.map(
             (item: { timestamp: string; market_cap: string }) => {
-              console.log('item', item);
               return [Date.parse(item.timestamp), item.market_cap];
             }
           );
@@ -186,7 +184,6 @@ export class DiagramsComponent implements OnInit {
         .subscribe(
           (res: { timestamp: string; market_cap: string }[]) => {
             const fullData = res.map((item) => {
-              console.log('item', item);
               return [Date.parse(item.timestamp), item.market_cap];
             });
             this.updateSeries(fullData);
@@ -241,7 +238,6 @@ export class DiagramsComponent implements OnInit {
       (100 * (this.current - filtered[0][1])) / filtered[0][1];
 
     let div: number;
-    console.log('filtered', filtered);
     if (option) {
       this.chart.updateOptions(
         this.updateOptionsData[option],

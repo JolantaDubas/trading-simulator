@@ -10,7 +10,7 @@ export class TradesComponent implements OnInit {
   @Input() trades: TradeItem[];
   @Input() capitalChange: number[][];
   dtOptions: DataTables.Settings;
-  @Input() coinChange: number[];
+  coinChange: number[];
 
   constructor() {
     this.dtOptions = {
@@ -23,7 +23,6 @@ export class TradesComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log('capitalChange', this.capitalChange);
     this.coinChange = this.trades.map(
       (trade) =>
         trade.amount * this.capitalChange[trade.key]['eur'] -
