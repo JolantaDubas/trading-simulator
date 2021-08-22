@@ -34,20 +34,21 @@ export class RegisterComponent implements OnInit {
   }
 
   onSubmit() {
-    this.authService
-      .register(this.form.value)
-      .pipe(
-        catchError((error: HttpErrorResponse) => {
-          if (error.error.status === 401) {
-            this.snackBar.showWarning(error.error.message, 'info');
-          } else this.snackBar.showError(error.error.message, 'error');
-          return throwError(error);
-        })
-      )
-      .subscribe((res: ResponseModel) => {
-        this.snackBar.showSuccess(res.message, 'success');
-        this.router.navigate(['auth/login']);
-      });
+    if (this.form.valid)
+      this.authService
+        .register(this.form.value)
+        .pipe(
+          catchError((error: HttpErrorResponse) => {
+            if (error.error.status === 401) {
+              this.snackBar.showWarning(error.error.message, 'info');
+            } else this.snackBar.showError(error.error.message, 'error');
+            return throwError(error);
+          })
+        )
+        .subscribe((res: ResponseModel) => {
+          this.snackBar.showSuccess(res.message, 'success');
+          this.router.navigate(['auth/login']);
+        });
   }
   get name(): FormControl {
     return this.form.get('name') as FormControl;

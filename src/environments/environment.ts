@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://localhost:3000/api/',
+  apiUrl: 'https://enigmatic-basin-38285.herokuapp.com/api/',
 };
 
 /*

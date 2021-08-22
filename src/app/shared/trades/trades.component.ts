@@ -17,6 +17,7 @@ export class TradesComponent implements OnInit {
       // info: false,
       paging: false,
       responsive: true,
+      orderMulti: true,
       //ordering: false,
       order: [],
     };

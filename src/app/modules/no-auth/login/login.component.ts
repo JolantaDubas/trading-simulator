@@ -40,22 +40,23 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-    this.authService
-      .login(this.form.value)
-      .pipe(
-        catchError((error: HttpErrorResponse) => {
-          if (error.error.status === 401) {
-            this.snackBar.showWarning(error.error.message);
-          } else this.snackBar.showError(error.error.message);
-          return throwError(error);
-        })
-      )
-      .subscribe((res: ResponseModel) => {
-        localStorage.setItem('Token', res.token);
-        this.getProfile();
-        this.snackBar.showSuccess(res.message);
-        this.router.navigate(['user/my-account']);
-      });
+    if (this.form.valid)
+      this.authService
+        .login(this.form.value)
+        .pipe(
+          catchError((error: HttpErrorResponse) => {
+            if (error.error.status === 401) {
+              this.snackBar.showWarning(error.error.message);
+            } else this.snackBar.showError(error.error.message);
+            return throwError(error);
+          })
+        )
+        .subscribe((res: ResponseModel) => {
+          localStorage.setItem('Token', res.token);
+          this.getProfile();
+          this.snackBar.showSuccess(res.message);
+          this.router.navigate(['user/my-account']);
+        });
   }
   getProfile() {
     this.userService.getProfile().subscribe((res: ResponseModel) => {
