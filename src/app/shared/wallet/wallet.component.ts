@@ -7,7 +7,6 @@ import { CoinGeckoService } from 'src/app/core/services/coin-gecko.service';
 @Component({
   selector: 'app-wallet',
   templateUrl: './wallet.component.html',
-  styleUrls: ['./wallet.component.scss'],
 })
 export class WalletComponent implements OnInit {
   @Input() wallet: CapitalItem[];

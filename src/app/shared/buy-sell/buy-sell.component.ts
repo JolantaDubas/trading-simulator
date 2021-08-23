@@ -9,7 +9,6 @@ import { ResponseModel } from '../../core/models/responseModel';
 @Component({
   selector: 'app-buy-sell',
   templateUrl: './buy-sell.component.html',
-  styleUrls: ['./buy-sell.component.scss'],
 })
 export class BuySellComponent implements OnInit {
   @Input() coin: any;

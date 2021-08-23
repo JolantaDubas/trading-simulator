@@ -5,11 +5,7 @@ import {
   ApexTheme,
   ApexTooltip,
   ChartComponent,
-} from 'ng-apexcharts';
-
-import {
   ApexNonAxisChartSeries,
-  ApexResponsive,
   ApexChart,
 } from 'ng-apexcharts';
 

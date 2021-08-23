@@ -16,6 +16,7 @@ import { SnackBarService } from 'src/app/core/services/snackBar.service';
 import { TradeService } from 'src/app/core/services/trade.service';
 import { required } from 'src/app/core/validators';
 import { maxValue } from 'src/app/core/validators/maxValue';
+import { minValue } from 'src/app/core/validators/minValue';
 import { number } from 'src/app/core/validators/number';
 
 @Component({
@@ -49,8 +50,8 @@ export class TradeComponent implements OnInit {
     this.type = this.route.snapshot.paramMap.get('type') as 'buy' | 'sell';
 
     this.form = this.fb.group({
-      amount: [0, [number(), required()]],
-      buyPrice: [0, [number(), required()]],
+      amount: [],
+      buyPrice: [],
     });
     if (this.type !== 'buy' && this.type !== 'sell') {
       this.router.navigate(['user/my-account']);
@@ -134,19 +135,26 @@ export class TradeComponent implements OnInit {
       .getCapitals({ byCoin: this.details.id })
       .subscribe((res: ResponseModel) => {
         this.wallet = res.data;
-        console.log('wallet', this.wallet);
+
+        const validators = [
+          number(),
+          required(),
+          minValue(0, 'Number must be greater than 0.'),
+        ];
+
         if (this.type === 'buy') {
           this.sliderMax = this.wallet[0].amount;
-          this.buyPrice.setValidators(
-            maxValue(this.sliderMax, 'Number is bigger than your capital.')
-          );
+          this.buyPrice.setValidators([
+            ...validators,
+            maxValue(this.sliderMax, 'Number is bigger than your capital.'),
+          ]);
           this.buyPrice.updateValueAndValidity();
         } else {
           this.sliderMax = this.wallet[1].amount;
-
-          this.amount.setValidators(
-            maxValue(this.sliderMax, 'Number is bigger than your capital.')
-          );
+          this.amount.setValidators([
+            ...validators,
+            maxValue(this.sliderMax, 'Number is bigger than your capital.'),
+          ]);
           this.amount.updateValueAndValidity();
         }
         if (this.sliderMax < 100) this.sliderStep = 0.001;

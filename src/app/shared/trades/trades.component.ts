@@ -4,30 +4,20 @@ import { TradeItem } from 'src/app/core/models/tradeItem';
 @Component({
   selector: 'app-trades',
   templateUrl: './trades.component.html',
-  styleUrls: ['./trades.component.scss'],
 })
 export class TradesComponent implements OnInit {
   @Input() trades: TradeItem[];
   @Input() capitalChange: number[][];
   dtOptions: DataTables.Settings;
-  coinChange: number[];
 
   constructor() {
     this.dtOptions = {
-      // info: false,
       paging: false,
       responsive: true,
       orderMulti: true,
-      //ordering: false,
       order: [],
     };
   }
 
-  ngOnInit(): void {
-    this.coinChange = this.trades.map(
-      (trade) =>
-        trade.amount * this.capitalChange[trade.key]['eur'] -
-        trade.amount * trade.price
-    );
-  }
+  ngOnInit(): void {}
 }

@@ -27,7 +27,6 @@ export type ChartOptions = {
 @Component({
   selector: 'app-landing',
   templateUrl: './landing.component.html',
-  styleUrls: ['./landing.component.scss'],
 })
 export class LandingComponent implements OnInit {
   @ViewChild('chart') chart: ChartComponent;

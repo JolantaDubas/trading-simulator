@@ -11,11 +11,9 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss'],
 })
 export class RegisterComponent implements OnInit {
   form: FormGroup;
-  hide = true;
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
@@ -25,8 +23,6 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = this.fb.group({
-      // email: ['', [email('shared.form.validation.email'), required('shared.form.validation.email-required')]],
-      // password: ['', required('shared.form.validation.password-required')],
       name: ['', required()],
       email: ['', [email(), required()]],
       password: ['', [password(), required()]],
