@@ -7,12 +7,13 @@ import { TradeItem } from 'src/app/core/models/tradeItem';
 })
 export class TradesComponent implements OnInit {
   @Input() trades: TradeItem[];
+  @Input() walletSymbols: object;
   @Input() capitalChange: number[][];
   dtOptions: DataTables.Settings;
 
   constructor() {
     this.dtOptions = {
-      paging: false,
+      paging: true,
       responsive: true,
       orderMulti: true,
       order: [],

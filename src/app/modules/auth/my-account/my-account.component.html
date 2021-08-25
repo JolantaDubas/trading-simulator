@@ -1,8 +1,4 @@
 <div class="w-full grid gap-4">
-  <!-- <app-box title="My account" *ngIf="profile">
-    <p>Your account saldo:</p>
-    <h4>{{ profile.account }}</h4>
-  </app-box> -->
   <app-box title="My wallet" *ngIf="wallet && totalCapital">
     <div class="grid lg:grid-cols-2 gap-8">
       <div>
@@ -18,13 +14,23 @@
             class="grid lg:grid-cols-2 h-14 lg:h-10 items-center"
             *ngIf="!coin || coin === item.key || item.key === 'eur'"
           >
-            <h4
-              [routerLink]="['/coin', item.key]"
-              class="cursor-pointer font-semibold"
-            >
-              {{ item.name }}:
-              <span class="font-normal">{{ item.amount }}</span>
-            </h4>
+            <div class="flex">
+              <img
+                *ngIf="item.key !== 'eur'"
+                class="h-6 w-6 mr-2"
+                [src]="item.image"
+              />
+              <i
+                *ngIf="item.key === 'eur'"
+                class="fas fa-euro-sign h-6 w-6 mr-2"
+              ></i>
+              <p class="text-gray-900 text-left">
+                {{ item.name }}
+              </p>
+              <p class="pl-4">
+                {{ item.amount | currency: (item.symbol | uppercase) }}
+              </p>
+            </div>
             <div
               *ngIf="item.key !== 'eur' && capitalChange"
               class="grid grid-cols-2"
@@ -54,6 +60,7 @@
   <app-trades
     *ngIf="trades?.length && capitalChange"
     [trades]="trades"
+    [walletSymbols]="walletSymbols"
     [capitalChange]="capitalChange"
   ></app-trades>
 </div>

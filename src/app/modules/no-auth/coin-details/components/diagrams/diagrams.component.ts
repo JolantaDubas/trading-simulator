@@ -55,7 +55,6 @@ export class DiagramsComponent implements OnInit {
     private nomicsService: NomicsService
   ) {
     this.currency = localStorage.getItem('vs_currency');
-    this;
   }
 
   ngOnInit(): void {
@@ -108,9 +107,8 @@ export class DiagramsComponent implements OnInit {
       chart: {
         type: 'area',
         height: 500,
-
         events: {
-          zoomed: (chartContext, { xaxis }) => {
+          zoomed: (context, { xaxis }) => {
             this.generateRangeData(xaxis.min / 1000, xaxis.max / 1000);
           },
         },

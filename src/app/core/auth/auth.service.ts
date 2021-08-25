@@ -1,8 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
-import { catchError, tap } from 'rxjs/operators';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { environment } from 'src/environments/environment';
 @Injectable({
@@ -11,6 +8,7 @@ import { environment } from 'src/environments/environment';
 export class AuthService {
   constructor(private http: HttpClient) {}
   apiUrl = environment.apiUrl;
+  z;
   // public isAuthenticated(): boolean {
   //   const token = localStorage.getItem('Token') || ''; // Check whether the token is expired and return
   //   // true or false

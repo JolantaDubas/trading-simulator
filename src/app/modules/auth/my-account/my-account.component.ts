@@ -19,6 +19,7 @@ export class MyAccountComponent implements OnInit {
 
   profile: User;
   wallet: CapitalItem[];
+  walletSymbols: object;
   currency = 'eur';
   totalCapital: number;
   capitalChange: object;
@@ -42,6 +43,13 @@ export class MyAccountComponent implements OnInit {
 
     this.capitalService.getCapitals().subscribe((res: ResponseModel) => {
       this.wallet = res.data;
+      this.walletSymbols = this.wallet.reduce(
+        (obj, item) => ({
+          ...obj,
+          [item.key]: item.symbol,
+        }),
+        {}
+      );
       if (!this.trades)
         this.tradeService.getTrades().subscribe((res: ResponseModel) => {
           this.trades = res.data;
