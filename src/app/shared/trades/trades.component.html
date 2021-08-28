@@ -32,7 +32,7 @@
             >
           </td>
           <td>
-            {{ trade.amount | currency: walletSymbols[trade.key] | uppercaseg }}
+            {{ trade.amount | currency: walletSymbols[trade.key] | uppercase }}
           </td>
           <td>
             {{ trade.amount * trade.price | currency }}

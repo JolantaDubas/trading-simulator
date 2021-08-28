@@ -91,8 +91,8 @@ export class DiagramsComponent implements OnInit {
   }
 
   setChartData(currency) {
-    this.tmin = this.fullData[0][0];
     let length = this.fullData.length;
+    this.tmin = this.fullData[0][0];
     this.tmax = this.fullData[length - 1][0];
     this.current = this.fullData[length - 1][1];
     this.percentChange =
@@ -100,7 +100,6 @@ export class DiagramsComponent implements OnInit {
     this.chartOptions = {
       series: [
         {
-          name: '',
           data: this.fullData,
         },
       ],
@@ -109,7 +108,9 @@ export class DiagramsComponent implements OnInit {
         height: 500,
         events: {
           zoomed: (context, { xaxis }) => {
-            this.generateRangeData(xaxis.min / 1000, xaxis.max / 1000);
+            if (this.id !== 'market_cap')
+              this.generateRangeData(xaxis.min / 1000, xaxis.max / 1000);
+            else this.generateMarketCapRangeData(xaxis.min, xaxis.max);
           },
         },
         toolbar: {
@@ -164,71 +165,74 @@ export class DiagramsComponent implements OnInit {
   public updateOptions(option: string) {
     this.activeOptionButton = option;
 
-    if (this.id === 'market_cap') {
-      const end = new Date().toISOString();
-      let start: string;
-      if (option === 'max') start = '2011-09-17T02:00:00-00:00';
-      else
-        start = new Date(
-          Date.now() - Number(option) * 24 * 60 * 60 * 1000
-        ).toISOString();
+    this.cgChartService
+      .getFullData({
+        id: this.id,
+        vs_currency: this.currency,
+        days: option,
+      })
+      .subscribe((res: any) => {
+        this.updateSeries(res?.prices);
+      });
+  }
 
-      this.nomicsService
-        .getMarketCap({
-          start: start,
-          end: end,
-          currency: this.currency,
-        })
-        .subscribe(
-          (res: { timestamp: string; market_cap: string }[]) => {
-            const fullData = res.map((item) => {
-              return [Date.parse(item.timestamp), item.market_cap];
-            });
-            this.updateSeries(fullData);
-          },
-          (err) => console.log(err)
-        );
-    } else {
-      this.cgChartService
-        .getFullData({
-          id: this.id,
-          vs_currency: this.currency,
-          days: option,
-        })
-        .subscribe((res: any) => {
-          this.updateSeries(res?.prices);
-        });
-    }
+  public updateMarketCapOptions(option: string) {
+    this.activeOptionButton = option;
+
+    const end = new Date().toISOString();
+    let start: string;
+    if (option === 'max') start = '2011-09-17T02:00:00-00:00';
+    else
+      start = new Date(
+        Date.now() - Number(option) * 24 * 60 * 60 * 1000
+      ).toISOString();
+
+    this.nomicsService
+      .getMarketCap({
+        start: start,
+        end: end,
+        currency: this.currency,
+      })
+      .subscribe(
+        (res: { timestamp: string; market_cap: string }[]) => {
+          const fullData = res.map((item) => {
+            return [Date.parse(item.timestamp), item.market_cap];
+          });
+          this.updateSeries(fullData);
+        },
+        (err) => console.log(err)
+      );
   }
   public generateRangeData(from, to): void {
     this.activeOptionButton = '';
-    if (this.id === 'market_cap') {
-      this.nomicsService
-        .getMarketCap({
-          start: new Date(from * 1000).toISOString(),
-          end: new Date(to * 1000).toISOString(),
-          currency: this.currency,
-        })
-        .subscribe((res: { timestamp: string; market_cap: string }[]) => {
-          const fullData = res.map((item) => [
-            Date.parse(item.timestamp),
-            item.market_cap,
-          ]);
+    this.cgChartService
+      .getRangeData({
+        id: this.id,
+        vs_currency: this.currency,
+        from: from,
+        to: to,
+      })
+      .subscribe((res: any) => {
+        this.updateSeries(res?.prices);
+      });
+  }
 
-          this.updateSeries(fullData);
-        });
-    } else {
-      this.cgChartService
-        .getRangeData({
-          id: this.id,
-          vs_currency: this.currency,
-          from: from,
-          to: to,
-        })
-        .subscribe((res: any) => {
-          this.updateSeries(res?.prices);
-        });
-    }
+  public generateMarketCapRangeData(from, to): void {
+    this.activeOptionButton = '';
+    this.nomicsService
+      .getMarketCap({
+        start: new Date(from).toISOString(),
+        end: new Date(to).toISOString(),
+        currency: this.currency,
+      })
+      .subscribe((res: { timestamp: string; market_cap: string }[]) => {
+        const fullData = res.map((item) => [
+          Date.parse(item.timestamp),
+          item.market_cap,
+        ]);
+
+        this.updateSeries(fullData);
+      });
   }
 
   updateSeries(filtered, option?) {
