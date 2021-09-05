@@ -2,13 +2,22 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { environment } from 'src/environments/environment';
+import { SnackBarService } from '../services/snackBar.service';
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private snackBar: SnackBarService) {
+    const token = localStorage.getItem('Token') || ''; // Check whether the token is expired and return
+    if (this.jwtHelper.isTokenExpired(token)) {
+      localStorage.removeItem('Token');
+      this.snackBar.showInfo('You have been logout successfully');
+    }
+  }
   apiUrl = environment.apiUrl;
-  z;
+
+  public jwtHelper: JwtHelperService = new JwtHelperService();
+
   // public isAuthenticated(): boolean {
   //   const token = localStorage.getItem('Token') || ''; // Check whether the token is expired and return
   //   // true or false
@@ -34,6 +43,7 @@ export class AuthService {
   }
 
   loggedIn() {
+    // true or false
     return !!localStorage.getItem('Token');
   }
 

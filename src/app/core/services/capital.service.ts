@@ -21,9 +21,6 @@ export class CapitalService {
     });
   }
 
-  deleteCapital(id: number) {
-    return this.http.delete(`${environment.apiUrl}capital/delete${id}`);
-  }
 
   getCapitals(params?: { byCoin?: string }) {
     return this.http.get(`${environment.apiUrl}capital/list`, {
