@@ -11,7 +11,7 @@ export class AuthService {
     const token = localStorage.getItem('Token') || ''; // Check whether the token is expired and return
     if (this.jwtHelper.isTokenExpired(token)) {
       localStorage.removeItem('Token');
-      this.snackBar.showInfo('You have been logout successfully');
+      this.snackBar.showInfo('Your token has expired');
     }
   }
   apiUrl = environment.apiUrl;
