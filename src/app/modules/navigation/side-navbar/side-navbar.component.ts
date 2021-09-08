@@ -14,6 +14,14 @@ interface Link {
   styleUrls: ['./side-navbar.component.scss'],
 })
 export class SideNavbarComponent implements OnInit {
+  constructor(
+    public router: Router,
+    public userGuard: UserGuard,
+    public authService: AuthService
+  ) {}
+
+  ngOnInit(): void {}
+
   sharedLinks = [
     { title: 'DASHBOARD', path: '/', icon: 'fas fa-home' },
     { title: 'MARKET', path: '/market', icon: 'fas fa-coins' },
@@ -28,20 +36,7 @@ export class SideNavbarComponent implements OnInit {
   ];
   logoutUser = [
     { title: 'LOGIN/REGISTER', path: '/auth/login', icon: 'fas fa-key' },
-    // {
-    //   title: 'REGISTER',
-    //   path: '/auth/register',
-    //   icon: 'fas fa-clipboard-list',
-    // },
   ];
-  constructor(
-    public router: Router,
-    public userGuard: UserGuard,
-    public authService: AuthService
-  ) {}
-
-  ngOnInit(): void {}
-
   getLinks(): Link[] {
     if (this.authService.loggedIn()) {
       return [...this.sharedLinks, ...this.loginUser];

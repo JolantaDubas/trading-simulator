@@ -37,6 +37,7 @@ export class TradeComponent implements OnInit {
   sliderMax: number;
   sliderStep: number;
   capitalChange: object;
+  walletSymbols: object;
   constructor(
     private route: ActivatedRoute,
     private tradeService: TradeService,
@@ -94,6 +95,7 @@ export class TradeComponent implements OnInit {
         (res: { coins: any[]; exchanges: any[] }) => {
           this.details = res;
           this.getWallet();
+          this.walletSymbols = { [this.details.id]: this.details.symbol };
         },
         (err) => console.log(err)
       );

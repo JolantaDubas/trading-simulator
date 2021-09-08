@@ -7,6 +7,8 @@ import { SnackBarService } from '../services/snackBar.service';
   providedIn: 'root',
 })
 export class AuthService {
+  public jwtHelper: JwtHelperService = new JwtHelperService();
+
   constructor(private http: HttpClient, private snackBar: SnackBarService) {
     const token = localStorage.getItem('Token') || ''; // Check whether the token is expired and return
     if (this.jwtHelper.isTokenExpired(token) && token) {
@@ -16,13 +18,6 @@ export class AuthService {
   }
   apiUrl = environment.apiUrl;
 
-  public jwtHelper: JwtHelperService = new JwtHelperService();
-
-  // public isAuthenticated(): boolean {
-  //   const token = localStorage.getItem('Token') || ''; // Check whether the token is expired and return
-  //   // true or false
-  //   return !this.jwtHelper.isTokenExpired(token);
-  // }
   setLocalStorage(request) {
     return (
       request.hasOwnProperty('token') &&
