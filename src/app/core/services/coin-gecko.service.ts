@@ -29,7 +29,7 @@ export class CoinGeckoService {
   }
 
   getMarketData(curr = 'usd', params?: DataTablesParameters) {
-    return this.http.get('https://api.coingecko.com/api/v3/coins/markets/', {
+    return this.http.get('https://api.coingecko.com/api/v3/coins/markets', {
       params: {
         vs_currency: curr,
         order:
